@@ -7,7 +7,7 @@ export default function HeroStats({ CurrHalvingData,currHalvingPhase,totalBusine
 const halving =[ 
   { label: 'Halving:', value: (Number(currHalvingPhase>=0) ? (Number(currHalvingPhase)  ):0)},
 { label: 'Volume:', value: "$"+(Number(totalBusiness) / 10 ** 18)  +" = $" + (CurrHalvingData? Number(CurrHalvingData.volume)/10**18:0) },
-{ label: 'Returns:', value: CurrHalvingData? Number(CurrHalvingData.reward_percentage)/10**18 : 0 +"%"},
+{ label: 'Returns:', value: CurrHalvingData? Number(CurrHalvingData.reward_percentage)/10**18 +"%" : 0 +"%" },
 { label: 'Delay:', value: CurrHalvingData?  Number(CurrHalvingData.delay)/10**18 : 0 + ' Hrs' },
 { label: 'Max PH:', value: '$'+( CurrHalvingData?  Number(CurrHalvingData.max_ph)/10**18 : 0 )}]
   return (

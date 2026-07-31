@@ -24,6 +24,39 @@ const CopyIcon = () => (
   </svg>
 )
 
+const HandshakeIcon = () => (
+<svg
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M7.5 12.5L5 15L3.5 13.5L7 10L9.5 8.5L12 10L14.5 8.5L18 10L20.5 13.5L19 15L16.5 12.5"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  />
+  <path
+    d="M7.5 12.5L10 15C10.6 15.6 11.6 15.6 12.2 15L13.5 13.7"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  />
+  <path
+    d="M13.5 13.7L15 15.2C15.6 15.8 16.6 15.8 17.2 15.2L18.5 13.9"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  />
+</svg>
+
+)
+
 
 import {
   token_abi, 
@@ -407,7 +440,7 @@ async function like() {
             />
           </button>
           <button className={btnProvide} onClick={e => { e.stopPropagation(); setShowModal(true); }}>
-            <img src={help} alt="help" className="w-4 h-4" />
+          🤝
             <span>Provide Help</span>
           </button>
           <button disabled={order.rank_no==4}  className={`${btnBoost} disabled:cursor-not-allowed disabled:opacity-40 disabled:saturate-50`} onClick={e => {e.stopPropagation(); HandleBoost();}}>

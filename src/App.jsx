@@ -547,7 +547,7 @@ export default function App() {
           .marketplaceFeed(
             listType,
             cursor,
-            2
+            10
           )
           .call()
 
