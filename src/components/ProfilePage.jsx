@@ -101,7 +101,9 @@ export default function ProfilePage({
   setShowReviewModal,
   showReviewModal,
   refData,
-  userName
+  userName,
+  handlePH
+
 
 }) {
   const [expandedItems, setExpandedItems] = useState({})
@@ -168,6 +170,9 @@ function ethToWei(amount) {
         if(count==1)
         {
           set_count(0)
+          toast.success("Transaction Successful")
+          handlePH;
+
           notify()
           // setInvestment(0)
           // mount();
@@ -216,8 +221,8 @@ async function exit() {
       const tx = await writeContractAsync({
         abi: contract_abi,
         address: contract_address,
-        functionName: "exit", 
-        args: [Number(order.no)],
+        functionName: "exit_order", 
+        args: [Number(no)],
 
       });
 
@@ -358,16 +363,45 @@ async function exit() {
             <span className="font-sans text-[13px] font-normal text-gray-500 md:text-sm">Current Badge</span>
             
             
-            {user!=null ? (Number(user.rank_no)>0  ?          
+            {user!=null ? (Number(user.rank_no)>0 && Number(user.rank_no)<4 ?          
         
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center max-nav:hidden">
-          <img src={avatarComp[Number(user.rank_no)]} alt="avatar" className="w-8 h-8" />
+        <div className="flex h-10 w-22 shrink-0 items-center justify-center ">
+          <img src={avatarComp[Number(0)]} alt="avatar" className=" w-30 h-25" />
         </div> 
         
         :            
-        
-        <span className="font-sans text-[13px]  items-center justify-center text-white font-normal  md:text-sm">You dont own any badge</span>
+        ""
+        // <span className="font-sans text-[13px]  items-center justify-center text-white font-normal  md:text-sm">You dont own any badge</span>
       ):""} 
+
+    {user!=null ? (Number(user.rank_no)==4 ?          
+        
+        <div className="flex shrink-0 items-center justify-center ">
+        <div className="flex h-[95px] w-[95px] items-center justify-center rounded-full border-2 border-red-900 bg-red-950">
+        
+        <svg
+    width="22"
+    height="22"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="text-red-500"
+  >
+    <path d="M5 21V4" />
+    <path d="M5 4c5-3 9 3 14 0v9c-5 3-9-3-14 0" />
+  </svg>
+
+      </div>
+    </div> 
+        
+        :            
+        
+""      ):""} 
+
+      
             {/* <div className="flex min-h-32 flex-1 items-center justify-center md:min-h-40">
               <img src={diamond} alt="diamond" className="h-32 w-32 md:h-40 md:w-40" />
             </div> */}
@@ -499,7 +533,7 @@ async function exit() {
 
               <button 
               disabled={!item.is_unlocked || item.remaining_amount==0} className="flex cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-[7px] border-none bg-red-500 px-3.5 py-[7px] text-[13px] font-semibold text-white transition-colors hover:bg-red-400" 
-              onClick={e => {e.stopPropagation();handleExit()}}>
+              onClick={e => {e.stopPropagation();set_no(item.no);handleExit()}}>
                 <span>✕</span><span>Exit</span>
               </button>
 

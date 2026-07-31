@@ -125,7 +125,7 @@ function ethToWei(amount) {
 useEffect(()=>{
   setAmount(Number(order.remaining_amount)/10**18);
   setFee((Number(order.remaining_amount)/10**18)*2/100)
-},[])
+},[address])
 
   useEffect(()=>{
     if(isConfirmed && method==0)
@@ -334,7 +334,7 @@ useEffect(()=>{
                 }
           }
 
-          
+
       set_method(0)
 
       if( (Number(usdt_balance)/10**18) < Number(amount) )
@@ -448,12 +448,12 @@ useEffect(()=>{
         </div>
 
           <div className="mt-2.5 flex items-center gap-3 max-sm:flex-col">
-          {user.ph_count>0?( <button 
+          {user? user.ph_count>0?( <button 
           className="flex-1 cursor-pointer rounded-[14px] border-[1.5px] border-white/20 bg-transparent px-6 py-[18px] font-sans text-base font-bold text-white transition-colors hover:bg-white/[0.06] max-sm:w-full"
           onClick={handleChooseOnly}
           >
             Only Choose
-          </button>):("")}
+          </button>):(""):("")}
          
           <button 
           className="flex flex-1 cursor-pointer items-center justify-center gap-2.5 rounded-[14px] border-none bg-teal px-6 py-[18px] font-sans text-base font-bold text-teal-dark transition-colors hover:bg-teal-hover max-sm:w-full"

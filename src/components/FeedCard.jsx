@@ -262,7 +262,7 @@ async function like() {
         }
       if(Number(user.rank_no) == 4  )
         {
-          alert("You cant perform this, you exit the system");
+          alert("You cant perform this, You have exited the system");
           return
         }
 
@@ -301,20 +301,60 @@ async function like() {
                 
         {Number(order.rank_no)==4 ?          
         
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center max-nav:hidden">
-          <img src={avatarComp[Number(order.rank_no)]} alt="avatar" className="w-8 h-8" />
+        <div className="flex shrink-0 items-center justify-center max-nav:hidden">
+            <div className="flex h-[45px] w-[45px] items-center justify-center rounded-full border-2 border-red-900 bg-red-950">
+            
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#ef4444"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+            >
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+
+          </div>
         </div> 
-        
+
+
         :"" }
         {/* User info */}
         <div className="flex min-w-0 flex-1 flex-col gap-0.5">
           <div className="flex flex-wrap items-center gap-1">
             {/* Avatar - mobile only, inline with User-ID */}
-            {Number(order.rank_no)>0 ? (
-            <img src={avatarComp} alt="avatar" className="w-6 h-6 nav:hidden" />
+            {Number(order.rank_no)>0  && Number(order.rank_no)!=4 ? (
+            <img src={avatarComp[Number(order.rank_no)]} alt="avatar" className="w-6 h-6 nav:hidden" />
 
-            ):("")   }      
-<button onClick={e => {e.stopPropagation();copyToClipboard(order.seeker)}} className="flex shrink-0 cursor-pointer items-center border-none bg-transparent text-teal transition-opacity hover:opacity-70">
+            ):("")   }
+
+          {Number(order.rank_no)==4 ?          
+
+<div className="flex nav:hidden h-[50px] w-[50px] items-center justify-center rounded-full border-2 border-red-900 bg-red-950">
+<svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#ef4444"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+            >
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+
+</div>
+
+
+        :"" }
+
+
+            
+          <button onClick={e => {e.stopPropagation();copyToClipboard(order.seeker)}} className="flex shrink-0 cursor-pointer items-center border-none bg-transparent text-teal transition-opacity hover:opacity-70">
             <CopyIcon onClick={e => {e.stopPropagation();copyToClipboard(order.seeker)}} />
           </button>
             <span className="text-sm font-semibold text-cyan-400 max-[400px]:text-[13px]">{order.seeker.slice(0,3)+"..."+order.seeker.slice(39,42)}</span>
@@ -370,7 +410,7 @@ async function like() {
             <img src={help} alt="help" className="w-4 h-4" />
             <span>Provide Help</span>
           </button>
-          <button  className={btnBoost} onClick={e => {e.stopPropagation(); HandleBoost();}}>
+          <button disabled={order.rank_no==4}  className={`${btnBoost} disabled:cursor-not-allowed disabled:opacity-40 disabled:saturate-50`} onClick={e => {e.stopPropagation(); HandleBoost();}}>
             <img src={boost} alt="boost" className="w-4 h-4" />
             <span>Boost</span>
           </button>

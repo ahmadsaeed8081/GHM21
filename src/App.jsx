@@ -1377,6 +1377,8 @@ export default function App() {
             handleReviewSubmit={handleReviewSubmit}
             myLastOrder={myLastOrder}
             refData={refData}
+            handlePH={handlePH}
+
           />
 
         ) : page === 'faq' ? (
@@ -1407,6 +1409,8 @@ export default function App() {
 
 
             <MarketplaceFeed
+
+              handlePH={handlePH}
 
               totalOrder={
                 totalOrder
