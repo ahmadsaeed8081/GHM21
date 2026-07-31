@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+@theme {
+  --color-app: #000c14;
+  --color-feed: #0b1120;
+  --color-card: #0e1728;
+  --color-input: #0d1729;
+  --color-mint: #04fca5;
+  --color-mint-text: #051a0f;
+  --color-teal: #00c896;
+  --color-teal-hover: #00d4a0;
+  --color-teal-dark: #003d2e;
+  --color-green: #00e676;
+  --color-green-mid: #00d084;
+  --color-dream: #5bb8f7;
+  --color-dream-hover: #75c6fa;
+  --color-dream-text: #0a1a2e;
+  --color-boost: #c8d62a;
+  --color-boost-hover: #d4e030;
+  --color-boost-text: #2a2e00;
+
+  --breakpoint-nav: 868px;
+  --breakpoint-profile: 900px;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      sans-serif;
+    background-color: var(--color-app);
+    color: #ffffff;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  ul,
+  ol {
+    list-style: none;
+  }
+
+  button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    font-family: inherit;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  #root {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  .Toastify__toast-container {
+    z-index: 999999 !important;
+  }
+  
+  .Toastify__toast {
+    z-index: 999999 !important;
+  }
+
+}
