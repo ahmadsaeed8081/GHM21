@@ -32,7 +32,7 @@ import {
 
 } from "../../src/components/configs/Contracts";
 
-export default function ProvideHelpModal({ handle_orders_feed,search,inner,user,CurrHalvingData,myLastOrder,onClose,usdt_balance,order,referral,is_suspended,isBlacklisted,allorders,index,total_Curr_market_seeking_ph }) {
+export default function ProvideHelpModal({ handle_orders_feed,search,inner,user,CurrHalvingData,myLastOrder,onClose,usdt_balance,order,referral,is_Suspended,isBlacklisted,allorders,index,total_Curr_market_seeking_ph }) {
   const [isEditing, setIsEditing] = useState(false)
   const [amount, setAmount] = useState('$50')
   const [reason, setReason] = useState('')
@@ -175,7 +175,7 @@ useEffect(()=>{
         return;
       }
 
-      if(is_suspended)
+      if(is_Suspended)
       {
         alert("You are suspended, You cant perform this action");
         return;
@@ -304,7 +304,7 @@ useEffect(()=>{
         alert("you can't provide help to your own order");
         return;
       }
-      if(is_suspended)
+      if(is_Suspended)
       {
         alert("You are suspended, You cant perform this action");
         return;

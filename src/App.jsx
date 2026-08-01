@@ -83,7 +83,9 @@ export default function App() {
 
   const [refData, ser_refData] = useState([])
   const [userName, setUserName] = useState("")
+  const [currTime, set_currTime] = useState(0)
 
+  
   // ============================================================
   // MARKETPLACE CURSOR PAGINATION
   // ============================================================
@@ -321,6 +323,11 @@ export default function App() {
           .get_userOrders(address)
           .call()
 
+          const choosed_order =
+          await contract.methods
+            .order(Number(user.choosed_ph_no)-1)
+            .call()
+  
       const refData =
         await contract.methods
           .get_refData(address)
@@ -332,7 +339,7 @@ export default function App() {
       let my_lastorder
 
 
-      const latestBlock =
+      const latestBlock = 
         await web3.eth.getBlock("latest")
 
       const curr_time =
@@ -371,24 +378,16 @@ export default function App() {
 
         }
 
-        else if (
-          user.choosed_ph_no != 0 &&
-          i == user.choosed_ph_no &&
-          (
-            curr_time -
-            Number(
-              my_orders[
-                user.choosed_ph_no
-              ].choosed_time
-            )
-          ) < 7200
-        ) {
 
-          my_choosedOrders.push(
-            my_orders[i]
-          )
 
-        }
+      }
+      console.log(choosed_order)
+
+      if ( user.choosed_ph_no != 0  && (curr_time - Number(choosed_order.choosed_time)) < 7200)
+      {
+
+        my_choosedOrders.push(choosed_order)
+  
 
       }
 
@@ -404,14 +403,11 @@ export default function App() {
 
       }
 
-
+      setMyChoosedOrders(my_choosedOrders)
       setMyLockedOrders(
         my_lockedOrders
       )
 
-      setMyChoosedOrders(
-        my_choosedOrders
-      )
 
       set_myLastOrder(
         my_lastorder
@@ -472,6 +468,8 @@ export default function App() {
       set_usdtBalance(
         usdt_balance
       )
+
+      set_currTime(curr_time)
 
     }
 
@@ -1378,7 +1376,8 @@ export default function App() {
             myLastOrder={myLastOrder}
             refData={refData}
             handlePH={handlePH}
-
+            handle_orders_feed={handle_orders_feed} 
+            currTime={currTime}
           />
 
         ) : page === 'faq' ? (

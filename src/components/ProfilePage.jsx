@@ -15,7 +15,7 @@ import Web3 from "web3";
 import { useWeb3Modal,useWeb3ModalTheme } from '@web3modal/wagmi/react'
 import { useAccount, useReadContract, useWriteContract,useWaitForTransactionReceipt } from "wagmi";
 import { useSwitchChain, useDisconnect } from "wagmi";
-
+import ProvideHelpModal from './ProvideHelpModal';
 
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -41,27 +41,42 @@ const avatarComponents = [shield, medal, crown]
 const cardSurface =
   'box-border flex flex-col gap-2.5 rounded-3xl border-[1.5px] border-white/[0.24] bg-white/[0.04]'
 
-function RecommitTimer({ initial = 6037 }) {
-  const [secs, setSecs] = useState(initial)
-  useEffect(() => {
-    const t = setInterval(() => setSecs(s => (s > 0 ? s - 1 : 0)), 1000)
-    return () => clearInterval(t)
-  }, [])
-  const h = String(Math.floor(secs / 3600)).padStart(2, '0')
-  const m = String(Math.floor((secs % 3600) / 60)).padStart(2, '0')
-  const s = String(secs % 60).padStart(2, '0')
-  return (
-    <div className="flex h-[84px] w-[84px] flex-col items-center justify-center gap-0.5 rounded-full border-[2.5px] border-teal">
-      <span className="font-sans text-[10px] font-semibold tracking-[0.3px] text-teal">
-        Recommit
-      </span>
-      <span className="font-sans text-[13px] font-bold tracking-[0.5px] text-teal">
-        {h}:{m}:{s}
-      </span>
-    </div>
-  )
-}
-
+  function RecommitTimer({ initial }) {
+    const getRemainingSeconds = () => {
+      const now = Math.floor(Date.now() / 1000);
+      return Math.max(Number(initial) - now, 0);
+    };
+  
+    const [secs, setSecs] = useState(getRemainingSeconds);
+  
+    useEffect(() => {
+      const updateTimer = () => {
+        setSecs(getRemainingSeconds());
+      };
+  
+      updateTimer();
+  
+      const t = setInterval(updateTimer, 1000);
+  
+      return () => clearInterval(t);
+    }, [initial]);
+  
+    const h = String(Math.floor(secs / 3600)).padStart(2, '0');
+    const m = String(Math.floor((secs % 3600) / 60)).padStart(2, '0');
+    const s = String(secs % 60).padStart(2, '0');
+  
+    return (
+      <div className="flex h-[84px] w-[84px] flex-col items-center justify-center gap-0.5 rounded-full border-[2.5px] border-teal">
+        <span className="font-sans text-[10px] font-semibold tracking-[0.3px] text-teal">
+          Recommit
+        </span>
+  
+        <span className="font-sans text-[13px] font-bold tracking-[0.5px] text-teal">
+          {h}:{m}:{s}
+        </span>
+      </div>
+    );
+  }
 const helpItems = [
   { status: 'timer' },
   { status: 'done' },
@@ -102,8 +117,9 @@ export default function ProfilePage({
   showReviewModal,
   refData,
   userName,
-  handlePH
-
+  handlePH,
+  handle_orders_feed,
+  curr_time
 
 }) {
   const [expandedItems, setExpandedItems] = useState({})
@@ -118,6 +134,7 @@ export default function ProfilePage({
   const chainId = import.meta.env.VITE_WC_ENV == "production" ? polygon.id : polygonAmoy.id;
   const { chainId: currentChainId } = useAccount();
   const [showModal, setShowModal] = useState(false)
+  const [showphModal, setShow_PHModal] = useState(false)
 
   const [showCertificate, setShowCertificate] = useState(false);
 
@@ -551,7 +568,7 @@ async function exit() {
               {
           boostLoading?(
             <button className={`${btnBoost} gap-2`}>
-              <span>Processing</span>      
+              {/* <span>Processing</span>       */}
             <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
 
           </button>
@@ -570,7 +587,7 @@ async function exit() {
               <button 
               className="flex cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-[7px] border-none bg-red-500 px-3.5 py-[7px] text-[13px] font-semibold text-white transition-colors hover:bg-red-400" 
              >
-            <span>Processing</span>      
+            {/* <span>Processing</span>       */}
             <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
               </button>
               :              
@@ -581,11 +598,11 @@ async function exit() {
                 <span>Exit</span>
               </button>
               }
-              <button 
+              {/* <button 
               disabled={!item.is_unlocked || item.remaining_amount==0} className="flex cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-[7px] border-none bg-red-500 px-3.5 py-[7px] text-[13px] font-semibold text-white transition-colors hover:bg-red-400" 
               onClick={e => {e.stopPropagation();set_no(item.no);handleExit()}}>
                 <span>✕</span><span>Exit</span>
-              </button>
+              </button> */}
 
             </div>
 
@@ -643,18 +660,25 @@ async function exit() {
             className={`w-2 h-[6px] transition-transform duration-200 ${expandedItems[i] ? 'rotate-180' : ''}`}
           />
         </button>
+        <button 
+            disabled={!item.is_unlocked || item.remaining_amount==0} className="flex cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-[7px] border-none bg-green-500 px-3.5 py-[7px] text-[13px] font-semibold text-white transition-colors hover:bg-green-400" 
+            onClick={e => { e.stopPropagation(); set_topup_no(item) ; setShow_PHModal(true); }}>
+              <span>🤝 Provide Help</span>
+            </button>
 
         {
           boostLoading?(
             <button className={btnBoost} >
             <img src={boost} alt="boost" className="w-4 h-4" />
-            <span>Boost</span>
+            <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+            
           </button> 
 
           ):(
-            <button className={btnBoost} onClick={e => e.stopPropagation()}>
+
+            <button disabled={!item.is_unlocked || item.remaining_amount==0} className={btnBoost} onClick={e => {set_no(item.no);e.stopPropagation();HandleBoost()}}>
             <img src={boost} alt="boost" className="w-4 h-4" />
-            <span>processing</span>
+            <span>Boost</span>
           </button> 
           )
         }
@@ -662,7 +686,7 @@ async function exit() {
       </div>
 
       <div className="flex shrink-0 items-center justify-center max-md:self-end">
-        {item.status === 'timer' && <RecommitTimer initial={6037} />}
+        {item.choosed_time > 0 && <RecommitTimer initial={(Number(item.choosed_time))} />}
         {item.status === 'done' && (
           <div className="flex h-[50px] w-[50px] items-center justify-center rounded-full bg-teal">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round">
@@ -716,6 +740,7 @@ async function exit() {
 
     </div>
       {showModal && <TopupModal    user={user} myLastOrder={myLastOrder}  total_Curr_market_seeking_ph={total_Curr_market_seeking_ph}  allorders={allorders}  referral={referral} usdt_balance={usdt_balance} order={topup_no} onClose={() => setShowModal(false)} />}
+      {showphModal && <ProvideHelpModal isBlacklisted={isBlackListed} isSuspended={isSuspended}handle_orders_feed={handle_orders_feed}  user={user}  total_Curr_market_seeking_ph={total_Curr_market_seeking_ph} order={my_choosedOrders[0]} allorders={allorders}   usdt_balance={usdt_balance}  onClose={() => setShow_PHModal(false)} />}
 
     </>
   )
