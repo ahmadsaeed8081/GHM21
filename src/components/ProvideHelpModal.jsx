@@ -42,6 +42,8 @@ export default function ProvideHelpModal({ handle_orders_feed,search,inner,user,
   const [method, set_method] = useState(0);
 
   const [order_no, set_order_no] = useState();
+  const [helpLoading, set_helpLoading] = useState(false);
+  const [chooseLoading, set_chooseLoading] = useState(false);
 
   const { isConnected,isDisconnected,chain } = useAccount()
   const { address } = useAccount();
@@ -68,6 +70,7 @@ function ethToWei(amount) {
 
   async function USDT_approval () {
     try {
+      set_helpLoading(true)
         const tx = await writeContractAsync({
           abi: token_abi,
           address: USDT_address,
@@ -79,6 +82,7 @@ function ethToWei(amount) {
   
        } catch (err) {
         console.error(err);
+        set_helpLoading(false)
     }
   }
 
@@ -91,8 +95,7 @@ function ethToWei(amount) {
           address: contract_address,
           functionName: "Provide_Help", 
           args: [order?order.no:0,
-            (amount? (amount)*10**18 : 0),ethToWei(fee),reason,referral
-            ],
+            (amount? (amount)*10**18 : 0),ethToWei(fee),reason,referral],
 
         });
 
@@ -101,11 +104,15 @@ function ethToWei(amount) {
     } catch (err) {
         console.error(err);
     }
+    finally{
+      set_helpLoading(false)
+    }
 }
 
   async function ChooseOnly() {
 
   try {
+    set_chooseLoading(true)
       const tx = await writeContractAsync({
         abi: contract_abi,
         address: contract_address,
@@ -120,6 +127,10 @@ function ethToWei(amount) {
 
   } catch (err) {
       console.error(err);
+  }
+  finally{
+    set_chooseLoading(false)
+
   }
 }
 useEffect(()=>{
@@ -309,11 +320,11 @@ useEffect(()=>{
           return;
         }
 
-      if(myLastOrder.close_time>0 && user.ph_count>=2 && !myLastOrder.letter)
-        {
-          alert("Kindly write a Letter of Happiness to continue with system");
-          return;
-        }
+      // if(myLastOrder.close_time>0 && user.ph_count>=2 && !myLastOrder.letter)
+      //   {
+      //     alert("Kindly write a Letter of Happiness to continue with system");
+      //     return;
+      //   }
 
         if(myLastOrder!=null)
           {
@@ -448,13 +459,45 @@ useEffect(()=>{
         </div>
 
           <div className="mt-2.5 flex items-center gap-3 max-sm:flex-col">
-          {user? user.ph_count>0?( <button 
-          className="flex-1 cursor-pointer rounded-[14px] border-[1.5px] border-white/20 bg-transparent px-6 py-[18px] font-sans text-base font-bold text-white transition-colors hover:bg-white/[0.06] max-sm:w-full"
-          onClick={handleChooseOnly}
+          {user? user.ph_count==0?( 
+            
+            chooseLoading?
+              (
+                <button className="flex-1 flex gap-2 items-center justify-center cursor-pointer rounded-[14px] border-[1.5px] border-white/20 bg-transparent px-6 py-[18px] font-sans text-base font-bold text-white transition-colors hover:bg-white/[0.06] max-sm:w-full">
+                  
+                  <span>Processing</span>
+                  <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+  
+                 </button>
+              ):
+              (
+                <button 
+                className="flex-1 cursor-pointer rounded-[14px] border-[1.5px] border-white/20 bg-transparent px-6 py-[18px] font-sans text-base font-bold text-white transition-colors hover:bg-white/[0.06] max-sm:w-full"
+                onClick={handleChooseOnly}
+                >
+                  Only Choose
+                </button>
+              )
+            
+
+        
+        
+        
+        
+        ):(""):("")}
+
+
+         {helpLoading?(
+
+          <button 
+          className="flex flex-1 gap-2 cursor-pointer items-center justify-center gap-2.5 rounded-[14px] border-none bg-teal px-6 py-[18px] font-sans text-base font-bold text-teal-dark transition-colors hover:bg-teal-hover max-sm:w-full"
           >
-            Only Choose
-          </button>):(""):("")}
-         
+            <span>Processing</span>
+            <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+
+          </button>
+          
+         ):(
           <button 
           className="flex flex-1 cursor-pointer items-center justify-center gap-2.5 rounded-[14px] border-none bg-teal px-6 py-[18px] font-sans text-base font-bold text-teal-dark transition-colors hover:bg-teal-hover max-sm:w-full"
           onClick={handlePH}
@@ -462,6 +505,8 @@ useEffect(()=>{
             <span>Confirm</span>
             <ArrowIcon />
           </button>
+
+         )}
         </div>
 
 

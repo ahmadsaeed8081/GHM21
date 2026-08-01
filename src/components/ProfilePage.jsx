@@ -127,6 +127,13 @@ export default function ProfilePage({
 
   const [topup_no, set_topup_no] = useState();
 
+
+  const [topUpLoading, setTopUpLoading] = useState(false);
+  const [boostLoading, setBoostLoading] = useState(false);
+  const [exitLoading, setExitLoading] = useState(false);
+
+
+
 const { switchChainAsync } = useSwitchChain();
   const { writeContractAsync,writeContract,data:hash, ...states } = useWriteContract();
   const { isLoading: isConfirming, isSuccess: isConfirmed} =
@@ -183,6 +190,9 @@ function ethToWei(amount) {
     },[isConfirmed])
   async function USDT_approval () {
     try {
+      
+        setBoostLoading(true)
+
         const tx = await writeContractAsync({
           abi: token_abi,
           address: USDT_address,
@@ -194,6 +204,7 @@ function ethToWei(amount) {
   
        } catch (err) {
         console.error(err);
+        setBoostLoading(false)
     }
   }
 
@@ -214,10 +225,14 @@ function ethToWei(amount) {
     } catch (err) {
         console.error(err);
     }
+    finally{
+      setBoostLoading(false)
+    }
 }
 async function exit() {
 
   try {
+    setExitLoading(true)
       const tx = await writeContractAsync({
         abi: contract_abi,
         address: contract_address,
@@ -230,6 +245,10 @@ async function exit() {
 
   } catch (err) {
       console.error(err);
+  }
+  finally{
+    setExitLoading(false)
+
   }
 }
 
@@ -446,6 +465,15 @@ async function exit() {
   ):(""):("")
   
 }
+<button
+    type="button"
+    className="w-full rounded-2xl bg-teal px-4 py-3 font-sans text-[14px] font-semibold text-teal-dark transition-colors hover:bg-teal-hover md:py-5 md:text-[18px]"
+  onClick={  
+    ()=>setShowReviewModal(true)
+  }
+  >
+    Submit Letter of Happiness
+  </button>
 
 {/* <>
             <span className="font-sans text-[13px] font-normal text-gray-500 md:text-sm">
@@ -526,11 +554,41 @@ async function exit() {
                   className={`w-2 h-[6px] transition-transform duration-200 ${expandedItems[i] ? 'rotate-180' : ''}`}
                 />
               </button>
-              <button disabled={!item.is_unlocked || item.remaining_amount==0} className={btnBoost} onClick={e => {set_no(item.no);e.stopPropagation();HandleBoost()}}>
-                <img src={boost} alt="boost" className="w-4 h-4" />
-                <span>Boost</span>
-              </button>
 
+
+              {
+          boostLoading?(
+            <button className={`${btnBoost} gap-2`}>
+              <span>processing</span>      
+            <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+
+          </button>
+
+          ):(
+            <button disabled={!item.is_unlocked || item.remaining_amount==0} className={btnBoost} onClick={e => {set_no(item.no);e.stopPropagation();HandleBoost()}}>
+            <img src={boost} alt="boost" className="w-4 h-4" />
+            <span>Boost</span>
+          </button>
+          )
+        }
+
+
+
+            {exitLoading?
+              <button 
+              className="flex cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-[7px] border-none bg-red-500 px-3.5 py-[7px] text-[13px] font-semibold text-white transition-colors hover:bg-red-400" 
+             >
+            <span>Processing</span>      
+            <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+              </button>
+              :              
+
+              <button 
+              disabled={!item.is_unlocked || item.remaining_amount==0} className="flex cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-[7px] border-none bg-red-500 px-3.5 py-[7px] text-[13px] font-semibold text-white transition-colors hover:bg-red-400" 
+              onClick={e => {e.stopPropagation();set_no(item.no);handleExit()}}>
+                <span>Exit</span>
+              </button>
+              }
               <button 
               disabled={!item.is_unlocked || item.remaining_amount==0} className="flex cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-[7px] border-none bg-red-500 px-3.5 py-[7px] text-[13px] font-semibold text-white transition-colors hover:bg-red-400" 
               onClick={e => {e.stopPropagation();set_no(item.no);handleExit()}}>
@@ -594,10 +652,21 @@ async function exit() {
           />
         </button>
 
-        <button className={btnBoost} onClick={e => e.stopPropagation()}>
-          <img src={boost} alt="boost" className="w-4 h-4" />
-          <span>Boost</span>
-        </button> 
+        {
+          boostLoading?(
+            <button className={btnBoost} >
+            <img src={boost} alt="boost" className="w-4 h-4" />
+            <span>Boost</span>
+          </button> 
+
+          ):(
+            <button className={btnBoost} onClick={e => e.stopPropagation()}>
+            <img src={boost} alt="boost" className="w-4 h-4" />
+            <span>processing</span>
+          </button> 
+          )
+        }
+
       </div>
 
       <div className="flex shrink-0 items-center justify-center max-md:self-end">

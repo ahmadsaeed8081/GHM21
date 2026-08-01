@@ -111,6 +111,7 @@ const { switchChainAsync } = useSwitchChain();
   })
   const { address,isConnected,isDisconnected } = useAccount();
 
+  const [boostLoading, setBoostLoading] = useState(false);
 
   const notify = () => toast("Transaction Successfull!");
   const notify1 = () => toast("Address Copied");
@@ -160,6 +161,7 @@ function ethToWei(amount) {
     },[isConfirmed])
   async function USDT_approval () {
     try {
+      setBoostLoading(true)
         const tx = await writeContractAsync({
           abi: token_abi,
           address: USDT_address,
@@ -170,6 +172,8 @@ function ethToWei(amount) {
         // stake1();
   
        } catch (err) {
+        setBoostLoading(false)
+
         console.error(err);
     }
   }
@@ -190,6 +194,10 @@ function ethToWei(amount) {
 
     } catch (err) {
         console.error(err);
+    }
+    finally{
+      setBoostLoading(false)
+
     }
 }
 async function like() {
@@ -273,7 +281,7 @@ async function like() {
         alert("Kindly Connect your wallet");
         return
       }
-      if(user.ph_count==0)
+      if(Number(user.ph_count)==0)
         {
           alert("only registered members can do this, kindly do one PH to become a registered member");
           return;
@@ -443,10 +451,23 @@ async function like() {
           🤝
             <span>Provide Help</span>
           </button>
-          <button disabled={order.rank_no==4}  className={`${btnBoost} disabled:cursor-not-allowed disabled:opacity-40 disabled:saturate-50`} onClick={e => {e.stopPropagation(); HandleBoost();}}>
+
+
+          {boostLoading?(
+
+          <button className={`${btnBoost} disabled:cursor-not-allowed disabled:opacity-40 disabled:saturate-50`} onClick={e => {e.stopPropagation(); HandleBoost();}}>
+          {/* <span>processing</span> */}
+          <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+
+        </button>
+
+          ):(
+            <button disabled={order.rank_no==4}  className={`${btnBoost} disabled:cursor-not-allowed disabled:opacity-40 disabled:saturate-50`} onClick={e => {e.stopPropagation(); HandleBoost();}}>
             <img src={boost} alt="boost" className="w-4 h-4" />
             <span>Boost</span>
           </button>
+          )}
+
         </div>
         <ToastContainer
         position="top-right"

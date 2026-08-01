@@ -11,6 +11,7 @@ import { useAccount, useReadContract, useWriteContract,useWaitForTransactionRece
 import { useSwitchChain, useDisconnect } from "wagmi";
 
 
+
 import {
   token_abi, 
   USDT_address,  
@@ -44,6 +45,10 @@ export default function ReviewModal({ onClose, onLater, onReview,is_suspended,is
   const [media, setMedia] = useState(null);
   const [count, set_count] = useState(0);
   const [method, set_method] = useState(0);
+  const [submitLoading, setSubmitLoading] = useState(false);
+  const [bypassLoading, setBypassLoading] = useState(false);
+
+
 
     const { isConnected,isDisconnected,chain } = useAccount()
     const { address } = useAccount();
@@ -88,7 +93,10 @@ export default function ReviewModal({ onClose, onLater, onReview,is_suspended,is
   },[isConfirmed])
 
     async function USDT_approval () {
+      setBypassLoading(true);
+
       try {
+        
           const tx = await writeContractAsync({
             abi: token_abi,
             address: USDT_address,
@@ -98,8 +106,12 @@ export default function ReviewModal({ onClose, onLater, onReview,is_suspended,is
           }); 
     
          } catch (err) {
+          setBypassLoading(false)
           console.error(err);
       }
+      // finally{
+      //   setBypassLoading(false)
+      // }
     }
 
 
@@ -120,9 +132,14 @@ async function bypass_letter() {
   } catch (err) {
       console.error(err);
   }
+  finally{
+    setBypassLoading(false)
+  }
 }
 
-async function submission_of_letter() {
+async function submission_of_letter() 
+{
+  setSubmitLoading(true)
 
   try {
       const tx = await writeContractAsync({
@@ -137,6 +154,10 @@ async function submission_of_letter() {
 
   } catch (err) {
       console.error(err);
+  }
+  finally{
+    setSubmitLoading(false)
+
   }
 }
 
@@ -179,47 +200,6 @@ async function submission_of_letter() {
 
   }
 
-  // async function next_submit() {
-  //   try {
-  //     const BOT_TOKEN = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
-  //     const GROUP_ID = import.meta.env.VITE_TELEGRAM_GROUP_ID;
-  
-  //     const message = `
-  // 📝 New Letter of Happiness
-  
-  // 💬 Review:
-  // ${review}
-  // `;
-  
-  //     const response = await fetch(
-  //       `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
-  //       {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify({
-  //           chat_id: GROUP_ID,
-  //           text: message,
-  //         }),
-  //       }
-  //     );
-  
-  //     const data = await response.json();
-  
-  //     if (!data.ok) {
-  //       console.error("Telegram Error:", data);
-  //       return;
-  //     }
-  
-  //     console.log("Message sent successfully");
-  
-  //     onClose?.();
-  
-  //   } catch (error) {
-  //     console.error("Telegram Error:", error);
-  //   }
-  // }
 
 
   async function next_submit() {
@@ -243,7 +223,6 @@ async function submission_of_letter() {
   
       // Case 1: No media (Text only)
       if (!media) {
-        alert("helo")
         await fetch(
           `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
           {
@@ -324,6 +303,10 @@ async function submission_of_letter() {
   
     } catch (error) {
       console.error("Telegram Error:", error);
+    }
+    finally{
+      setSubmitLoading(false)
+
     }
   }
 
@@ -476,6 +459,18 @@ async function submission_of_letter() {
         </div>
 
         <div className="mt-2.5 flex items-center gap-3 max-sm:flex-col">
+
+
+          {bypassLoading ? (
+            <button disabled={bypassLoading}
+  type="button"
+  className="flex flex-1 gap-2 cursor-pointer items-center justify-center rounded-[14px] border-[1.5px] border-white/20 bg-transparent px-10 py-[18px] font-sans text-base font-bold text-white transition-colors hover:bg-white/[0.06] max-sm:w-full"
+  // onClick={handleBypass}
+>Processing 
+  <span className="h-4 w-4 animate-spin  rounded-full border-2 border-white/30 border-t-white" />
+</button>
+  ) : (
+    <>
           <button
             type="button"
             className="flex-1 cursor-pointer rounded-[14px] border-[1.5px] border-white/20 bg-transparent px-6 py-[18px] font-sans text-base font-bold text-white transition-colors hover:bg-white/[0.06] max-sm:w-full"
@@ -483,6 +478,19 @@ async function submission_of_letter() {
           >
             Bypass
           </button>
+    </>
+  )}
+  {submitLoading ? (
+          <button
+            type="button"
+            className="flex gap-2 flex-1 cursor-pointer items-center justify-center rounded-[14px] border-none bg-teal px-6 py-[18px] font-sans text-base font-bold text-teal-dark transition-colors hover:bg-teal-hover max-sm:w-full"
+            >
+            Processing
+            <span className="h-4 w-4 animate-spin  rounded-full border-2 border-white/30 border-t-white" />
+
+          </button>
+
+  ):(
           <button
             type="button"
             className="flex flex-1 cursor-pointer items-center justify-center rounded-[14px] border-none bg-teal px-6 py-[18px] font-sans text-base font-bold text-teal-dark transition-colors hover:bg-teal-hover max-sm:w-full"
@@ -490,6 +498,9 @@ async function submission_of_letter() {
           >
             Submit
           </button>
+    
+  )}
+          
         </div>
       </div>
     </div>
