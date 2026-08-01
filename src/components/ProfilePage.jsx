@@ -119,7 +119,8 @@ export default function ProfilePage({
   userName,
   handlePH,
   handle_orders_feed,
-  curr_time
+  curr_time,
+  CurrHalvingData
 
 }) {
   const [expandedItems, setExpandedItems] = useState({})
@@ -637,13 +638,22 @@ async function exit() {
       className="box-border flex min-h-[142px] cursor-pointer items-center justify-between gap-4 rounded-3xl border-[1.5px] border-white/[0.24] bg-white/[0.12] p-6 max-md:flex-col max-md:items-start"
       onClick={() => toggleExpand(i)}
     >
+      
       <div className="flex min-w-0 flex-1 flex-col gap-1.5">
+      <span className="font-sans text-sm  leading-none text-blue">{(item.seeker).slice(0,4)+"..."+(item.seeker).slice(38,42)}</span>
+
         <div className="flex items-center gap-1.5">
+          
           <span className="font-sans text-lg font-bold leading-none text-green">${Number(item.remaining_amount)/10**18}</span>
-          <span className="text-[15px] leading-none"> 🔥🚀</span>
+          {/* <span className="text-[15px] leading-none"> 🔥🚀</span> */}
+        </div>
+        <div className="flex items-center gap-1.5">
+          
+          {/* <span className="font-sans text-xs font-bold leading-none">{Number(item.total_ph)}</span>
+          <span className="text-[15px] leading-none"> 🔥🚀</span> */}
         </div>
         <div className="flex items-center gap-1 font-sans text-[13px] font-normal text-gray-400">
-          <span>👍 23</span>
+          {/* <span>👍 {item.likes}</span> */}
         </div>
         <p className={`font-sans text-[13px] font-normal leading-normal text-gray-500 ${expandedItems[i] ? '' : 'hidden'}`}>
          {item.Dream}
@@ -686,7 +696,7 @@ async function exit() {
       </div>
 
       <div className="flex shrink-0 items-center justify-center max-md:self-end">
-        {item.choosed_time > 0 && <RecommitTimer initial={(Number(item.choosed_time))} />}
+        {item.choosed_time > 0 && <RecommitTimer initial={(Number(item.choosed_time)+7200)} />}
         {item.status === 'done' && (
           <div className="flex h-[50px] w-[50px] items-center justify-center rounded-full bg-teal">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round">
@@ -740,7 +750,7 @@ async function exit() {
 
     </div>
       {showModal && <TopupModal    user={user} myLastOrder={myLastOrder}  total_Curr_market_seeking_ph={total_Curr_market_seeking_ph}  allorders={allorders}  referral={referral} usdt_balance={usdt_balance} order={topup_no} onClose={() => setShowModal(false)} />}
-      {showphModal && <ProvideHelpModal isBlacklisted={isBlackListed} isSuspended={isSuspended}handle_orders_feed={handle_orders_feed}  user={user}  total_Curr_market_seeking_ph={total_Curr_market_seeking_ph} order={my_choosedOrders[0]} allorders={allorders}   usdt_balance={usdt_balance}  onClose={() => setShow_PHModal(false)} />}
+      {showphModal && <ProvideHelpModal  referral={referral} CurrHalvingData={CurrHalvingData} isBlacklisted={isBlackListed} isSuspended={isSuspended}handle_orders_feed={handle_orders_feed}  user={user}  total_Curr_market_seeking_ph={total_Curr_market_seeking_ph} order={my_choosedOrders[0]} allorders={allorders}   usdt_balance={usdt_balance}  onClose={() => setShow_PHModal(false)} />}
 
     </>
   )

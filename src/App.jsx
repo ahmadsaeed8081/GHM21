@@ -21,6 +21,7 @@ import {
   contract_address,
   contract_abi,
 } from "../src/components/configs/Contracts"
+// import { letterSpacing } from 'html2canvas/dist/types/css/property-descriptors/letter-spacing'
 
 
 const REVIEW_MODAL_DISMISSED_KEY = 'reviewModalDismissed'
@@ -322,11 +323,15 @@ export default function App() {
         await contract.methods
           .get_userOrders(address)
           .call()
+          let choosed_order;
+          if(user.choosed_ph_no>0)
+          {
+             choosed_order =
+            await contract.methods
+              .order(Number(user.choosed_ph_no)-1)
+              .call()
+          }
 
-          const choosed_order =
-          await contract.methods
-            .order(Number(user.choosed_ph_no)-1)
-            .call()
   
       const refData =
         await contract.methods
@@ -381,13 +386,14 @@ export default function App() {
 
 
       }
-      console.log(choosed_order)
 
       if ( user.choosed_ph_no != 0  && (curr_time - Number(choosed_order.choosed_time)) < 7200)
       {
 
+
         my_choosedOrders.push(choosed_order)
-  
+        my_choosedOrders[0].no=  Number(user.choosed_ph_no)-1;
+        console.log(my_choosedOrders)
 
       }
 
@@ -1378,6 +1384,7 @@ export default function App() {
             handlePH={handlePH}
             handle_orders_feed={handle_orders_feed} 
             currTime={currTime}
+            CurrHalvingData={CurrHalvingData}
           />
 
         ) : page === 'faq' ? (
