@@ -389,8 +389,8 @@ async function exit() {
         </div> 
         
         :            
-        ""
-        // <span className="font-sans text-[13px]  items-center justify-center text-white font-normal  md:text-sm">You dont own any badge</span>
+        
+        <span className="flex flex-1 font-sans text-[13px]  items-center justify-center text-white font-normal  md:text-sm">You dont own any Badge</span>
       ):""} 
 
     {user!=null ? (Number(user.rank_no)==4 ?          
@@ -465,15 +465,7 @@ async function exit() {
   ):(""):("")
   
 }
-<button
-    type="button"
-    className="w-full rounded-2xl bg-teal px-4 py-3 font-sans text-[14px] font-semibold text-teal-dark transition-colors hover:bg-teal-hover md:py-5 md:text-[18px]"
-  onClick={  
-    ()=>setShowReviewModal(true)
-  }
-  >
-    Submit Letter of Happiness
-  </button>
+
 
 {/* <>
             <span className="font-sans text-[13px] font-normal text-gray-500 md:text-sm">
@@ -559,7 +551,7 @@ async function exit() {
               {
           boostLoading?(
             <button className={`${btnBoost} gap-2`}>
-              <span>processing</span>      
+              <span>Processing</span>      
             <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
 
           </button>

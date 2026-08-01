@@ -40,6 +40,7 @@ export default function ProvideHelpModal({ search,inner,user,CurrHalvingData,myL
 
    const [count, set_count] = useState(0);
   const [method, set_method] = useState(0);
+  const [loading, set_loading] = useState(0);
 
   const [order_no, set_order_no] = useState();
 
@@ -68,7 +69,9 @@ function ethToWei(amount) {
 
   async function USDT_approval () {
     try {
-        const tx = await writeContractAsync({
+      set_loading(true)
+        const tx = 
+        await writeContractAsync({
           abi: token_abi,
           address: USDT_address,
           args: [contract_address,( amount ? Number(amount)* 10**18 : "0")],
@@ -79,6 +82,7 @@ function ethToWei(amount) {
   
        } catch (err) {
         console.error(err);
+        set_loading(false)
     }
   }
 
@@ -102,30 +106,14 @@ function ethToWei(amount) {
     } catch (err) {
         console.error(err);
     }
+    finally{
+      set_loading(false)
+
+    }
 }
 
-  async function ChooseOnly() {
 
-  alert(referral)
-  try {
-      const tx = await writeContractAsync({
-        abi: contract_abi,
-        address: contract_address,
-        functionName: "set_onlyChoose", 
-        args: [
-          (order ? order.no : 0)
-          ],
-
-      });
-
-      set_count(1)
-
-  } catch (err) {
-      console.error(err);
-  }
-}
 useEffect(()=>{
-  // setAmount(Number(order.remaining_amount)/10**18);
   setFee((Number(order.remaining_amount)/10**18)*2/100)
 },[])
 
@@ -385,7 +373,16 @@ useEffect(()=>{
 
           <div className="mt-2.5 flex items-center gap-3 max-sm:flex-col">
 
-         
+         {loading?(
+          <button 
+          className="flex flex-1 cursor-pointer items-center justify-center gap-2.5 rounded-[14px] border-none bg-teal px-6 py-[18px] font-sans text-base font-bold text-teal-dark transition-colors hover:bg-teal-hover max-sm:w-full"
+          >
+            <span>Processing</span>
+            <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+
+          </button>
+         ):(
+
           <button 
           className="flex flex-1 cursor-pointer items-center justify-center gap-2.5 rounded-[14px] border-none bg-teal px-6 py-[18px] font-sans text-base font-bold text-teal-dark transition-colors hover:bg-teal-hover max-sm:w-full"
           onClick={handlePH}
@@ -393,6 +390,12 @@ useEffect(()=>{
             <span>Confirm</span>
             <ArrowIcon />
           </button>
+
+         )}
+
+
+
+
         </div> 
 
 
