@@ -459,7 +459,7 @@ useEffect(()=>{
         </div>
 
           <div className="mt-2.5 flex items-center gap-3 max-sm:flex-col">
-          {user? user.ph_count==0?( 
+          {user? user.ph_count>0?( 
             
             chooseLoading?
               (
