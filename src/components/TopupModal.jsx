@@ -89,7 +89,6 @@ function ethToWei(amount) {
 
   async function PH() {
 
-    alert(order_no)
     try {
         const tx = await writeContractAsync({
           abi: contract_abi,
@@ -192,9 +191,9 @@ useEffect(()=>{
       //   alert("please write Reason to help");
       //   return;
       // }
-      if(amount < 10)
+      if(amount < 10-(Number(order.remaining_amount)/10**18))
         {
-          alert("Minimum PH smount is 10$");
+          alert("Minimum PH smount is $" +( Number(10) - (Number(order.remaining_amount)/10**18)));
           return;
         }
 

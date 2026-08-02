@@ -523,20 +523,43 @@ async function exit() {
             } `}
             onClick={() => toggleExpand(i)}
           >
-            <div className="flex min-w-0 flex-1 flex-col gap-1.5">
-              <div className="flex items-center gap-1.5">
-                <span className="font-sans text-lg font-bold leading-none text-green">${Number(item.remaining_amount)/10**18}</span>
-                {/* <span className="text-[15px] leading-none"> 🔥🚀</span> */}
-              </div>
-              <div className="flex items-center gap-1 font-sans text-[13px] font-normal text-gray-400">
-                <span>👍 {user.likes}</span>
-              </div>
-              <p className={`font-sans text-[13px] font-normal leading-normal text-gray-500 ${expandedItems[i] ? '' : 'hidden'}`}>
-               {item.Dream}
-              </p>
-            </div>
+<div>
+<div className="grid grid-cols-3 gap-1 max-sm:gap-0.5">
 
-            <div className="flex shrink-0 items-center gap-2 max-md:flex-wrap">
+  <div className="flex flex-col gap-1">
+    <span className="font-sans text-[11px] font-medium uppercase tracking-wide text-gray-500">
+      Invest
+    </span>
+    <span className="font-sans text-[15px] font-semibold leading-none text-white">
+      ${Number(item.ph_amount) / 10**18}
+    </span>
+  </div>
+
+  <div className="flex flex-col gap-1">
+    <span className="font-sans text-[11px] font-medium uppercase tracking-wide text-gray-500">
+      Reward
+    </span>
+    <span className="font-sans text-[15px] font-semibold leading-none text-teal">
+      ${Number(item.reward_amount) / 10**18}
+    </span>
+  </div>
+
+  <div className="flex flex-col gap-1">
+    <span className="font-sans text-[11px] font-medium uppercase tracking-wide text-gray-500">
+      Remaining
+    </span>
+    <span className="font-sans text-[16px] font-bold leading-none text-green">
+      ${Number(item.remaining_amount) / 10**18}
+    </span>
+  </div>
+
+</div>
+<p className={`font-sans text-[13px] font-normal leading-relaxed text-gray-500 ${ expandedItems[i] ? '' : 'hidden' }`} > {item.Dream} </p>
+
+</div>
+
+
+            <div className="flex shrink-0 items-right gap-2 max-md:flex-wrap">
               
             {item.is_unlocked && Number(item.remaining_amount)/10**18 < 10 ?
             

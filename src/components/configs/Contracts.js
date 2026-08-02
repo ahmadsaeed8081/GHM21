@@ -1,6 +1,6 @@
 
 export const USDT_address="0x1E537F8BD3228d4EfBF20bD837a48a96649A8D5A"
-export const contract_address="0xc58Ed8Ee3b7E58Dec454E704791c3A74d39c1d7C"
+export const contract_address="0x15D230Fb33ea2D0fbcd669569cBa875C25F2DE4D"
 export const school_contract_address="0x848C76AcF2453c357887B24a6870ebfa7495f70f"
 export const token_abi=[
 	{
@@ -232,6 +232,17 @@ export const contract_abi=[
 		"inputs": [
 			{
 				"internalType": "uint256",
+				"name": "_key",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
 				"name": "orderNo",
 				"type": "uint256"
 			}
@@ -244,26 +255,6 @@ export const contract_abi=[
 				"type": "bool"
 			}
 		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "bypass_letter",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "no",
-				"type": "uint256"
-			}
-		],
-		"name": "exit_order",
-		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
@@ -303,101 +294,6 @@ export const contract_abi=[
 	{
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "add",
-				"type": "address"
-			}
-		],
-		"name": "set_examPassed",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "add",
-				"type": "address"
-			}
-		],
-		"name": "set_like",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "no",
-				"type": "uint256"
-			}
-		],
-		"name": "set_onlyChoose",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_name",
-				"type": "string"
-			}
-		],
-		"name": "set_userName",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_key",
-				"type": "uint256"
-			}
-		],
-		"name": "submission_of_letter",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256[]",
-				"name": "no",
-				"type": "uint256[]"
-			},
-			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "system_sweep",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
 				"internalType": "uint256",
 				"name": "amount",
 				"type": "uint256"
@@ -418,11 +314,6 @@ export const contract_abi=[
 		],
 		"stateMutability": "nonpayable",
 		"type": "function"
-	},
-	{
-		"inputs": [],
-		"stateMutability": "nonpayable",
-		"type": "constructor"
 	},
 	{
 		"inputs": [
@@ -468,6 +359,13 @@ export const contract_abi=[
 	},
 	{
 		"inputs": [],
+		"name": "bypass_letter",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "curr_halvingPhase",
 		"outputs": [
 			{
@@ -480,6 +378,19 @@ export const contract_abi=[
 		"type": "function"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "no",
+				"type": "uint256"
+			}
+		],
+		"name": "exit_order",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "find_curr_day",
 		"outputs": [
@@ -487,6 +398,218 @@ export const contract_abi=[
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_user",
+				"type": "address"
+			}
+		],
+		"name": "getDirectUnlockedFeed",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "no",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "seeker",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "total_ph",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "total_gh",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "likes",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "total_team",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "rank_no",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "ph_amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "reward_amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "remaining_amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "Dream",
+						"type": "string"
+					},
+					{
+						"internalType": "bool",
+						"name": "letter",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "boost_time",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "is_unlocked",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "exit_fee",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "choosed_time",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "speedstar_time",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct GHM21.FeedOrder[]",
+				"name": "feed",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "i",
+				"type": "uint256"
+			}
+		],
+		"name": "get_OrderDetail",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "no",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "seeker",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "total_ph",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "total_gh",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "likes",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "total_team",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "rank_no",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "ph_amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "reward_amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "remaining_amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "Dream",
+						"type": "string"
+					},
+					{
+						"internalType": "bool",
+						"name": "letter",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "boost_time",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "is_unlocked",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "exit_fee",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "choosed_time",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "speedstar_time",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct GHM21.FeedOrder[]",
+				"name": "feed",
+				"type": "tuple[]"
 			}
 		],
 		"stateMutability": "view",
@@ -587,6 +710,16 @@ export const contract_abi=[
 					},
 					{
 						"internalType": "uint256",
+						"name": "ph_amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "reward_amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
 						"name": "remaining_amount",
 						"type": "uint256"
 					},
@@ -682,30 +815,6 @@ export const contract_abi=[
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "to",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "by",
-				"type": "address"
-			}
-		],
-		"name": "is_liked",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
 				"name": "add",
 				"type": "address"
 			}
@@ -749,6 +858,30 @@ export const contract_abi=[
 			}
 		],
 		"name": "isSuspended",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "to",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "by",
+				"type": "address"
+			}
+		],
+		"name": "is_liked",
 		"outputs": [
 			{
 				"internalType": "bool",
@@ -851,6 +984,16 @@ export const contract_abi=[
 					{
 						"internalType": "uint256",
 						"name": "rank_no",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "ph_amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "reward_amount",
 						"type": "uint256"
 					},
 					{
@@ -1017,6 +1160,96 @@ export const contract_abi=[
 	{
 		"inputs": [
 			{
+				"internalType": "address",
+				"name": "add",
+				"type": "address"
+			}
+		],
+		"name": "set_examPassed",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "add",
+				"type": "address"
+			}
+		],
+		"name": "set_examcontract",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "add",
+				"type": "address"
+			}
+		],
+		"name": "set_like",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "no",
+				"type": "uint256"
+			}
+		],
+		"name": "set_onlyChoose",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "add",
+				"type": "address"
+			}
+		],
+		"name": "set_sunsetcontract",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			}
+		],
+		"name": "set_userName",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
@@ -1041,6 +1274,26 @@ export const contract_abi=[
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_key",
+				"type": "uint256"
+			}
+		],
+		"name": "submission_of_letter",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "system_sweep",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{

@@ -230,12 +230,57 @@ useEffect(()=>{
         alert("Kindly choose a different amount,You cant invest more than the current halving max PH Amount");
         return;
       }
-        
-      if(referral=="0x0000000000000000000000000000000000000000")
-      {
-        alert("You can only join using a referral link");
-        return;
-      }
+        if(user.ph_count==0)
+        {
+          if(referral=="0x0000000000000000000000000000000000000000")
+            {
+              alert("You can only join using a referral link");
+              return;
+            }
+            else{
+
+
+               const web3 =
+                      new Web3(
+                        new Web3.providers.HttpProvider(
+                          "https://poly.api.pocket.network"
+                        )
+                      )
+              
+                      if (
+                        !web3.utils.isAddress(
+                          referral
+                        )
+                      ) {
+                  
+                        alert(
+                          "Incorrect Referral Link"
+                        )
+                  
+                        return
+                  
+                      }
+              
+                    const contract =
+                      new web3.eth.Contract(
+                        contract_abi,
+                        contract_address
+                      )
+              
+              
+                    const user =
+                      await contract.methods
+                        .user(referral)
+                        .call()
+                        if(user.ph_count==0)
+                        {
+                          alert("Your referral link does not belongs to a registered GHM21 member, kindly use a different link")
+                       return
+                        }
+                          
+            }
+        }
+
 
       if( (Number(usdt_balance)/10**18) < Number(amount+(amount*2/100)) )
         {

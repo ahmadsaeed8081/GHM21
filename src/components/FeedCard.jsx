@@ -92,7 +92,9 @@ export default function FeedCard({
   onToggleDream,
   search,
   inner,
-  handle_orders_feed
+  handle_orders_feed,
+  currTime
+
 
 }) {
   const avatarComp = avatarComponents;
@@ -400,7 +402,7 @@ async function like() {
           </button>
             <span className="text-sm font-semibold text-cyan-400 max-[400px]:text-[13px]">{order.seeker.slice(0,3)+"..."+order.seeker.slice(39,42)}</span>
            {Number(order.speedstar_time)>0? <span className="text-sm tracking-[2px]">🔥</span>:""}
-           {Number(order.boost_time)>0? <span className="text-sm tracking-[2px]">🚀</span>:""}
+           {Number(order.boost_time)>0 && (Number(currTime)- Number(order.boost_time))<900 ?<span className="text-sm tracking-[2px]">🚀</span>:""}
            {Number(order.rank_no)>0? <span className="text-sm tracking-[2px]">🛡️</span>:""}
            {/* {Number(order.boost_time)>0? <span className="text-sm tracking-[2px]">💎</span>:""} */}
 

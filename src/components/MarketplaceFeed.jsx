@@ -61,13 +61,14 @@ export default function MarketplaceFeed({
   outflowVelocityCheck,
   totalSuspension,
   usdt_balance,
+  currTime,
 
   allorders,
 
   referral,
   myLastOrder,
   total_Curr_market_seeking_ph,
-
+  myTeam_orders,
   SpeedStarOrders,
   small_orders,
   big_orders,
@@ -180,7 +181,15 @@ export default function MarketplaceFeed({
       )
 
     }
+    else if (
+      sortBy === "My_Team"
+    ) {
 
+      set_display_orders(
+        myTeam_orders || []
+      )
+
+    }
     else if (
       sortBy === "Speedstar"
     ) {
@@ -444,7 +453,6 @@ export default function MarketplaceFeed({
   async function next() {
 
     let temp = []
-    alert("working")
 
     try {
 
@@ -799,6 +807,7 @@ export default function MarketplaceFeed({
 
                   {[
                     ["latest", "Latest"],
+                    ["My_Team", "My Team"],
                     ["Speedstar", "Speedstars"],
                     ["Exit", "Exit Helps"],
                     ["Small", "Small Helps"],
@@ -915,6 +924,7 @@ export default function MarketplaceFeed({
           >
 
             <FeedCard
+            currTime={currTime}
 
               CurrHalvingData={
                 CurrHalvingData
@@ -1006,6 +1016,7 @@ export default function MarketplaceFeed({
                 (order, index) => (
 
                   <FeedCard
+                  currTime={currTime}
 
                     key={
                       order.no ??

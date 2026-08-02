@@ -81,7 +81,9 @@ export default function App() {
   const [small_orders, set_small_orders] = useState([])
   const [big_orders, set_big_orders] = useState([])
   const [exit_orders, set_exit_orders] = useState([])
+  const [myTeam_orders, set_myTeam_orders] = useState([])
 
+  
   const [refData, ser_refData] = useState([])
   const [userName, setUserName] = useState("")
   const [currTime, set_currTime] = useState(0)
@@ -323,12 +325,16 @@ export default function App() {
         await contract.methods
           .get_userOrders(address)
           .call()
+          const myTeam_orders =
+          await contract.methods
+            .getDirectUnlockedFeed(address)
+            .call()
           let choosed_order;
           if(user.choosed_ph_no>0)
           {
              choosed_order =
             await contract.methods
-              .order(Number(user.choosed_ph_no)-1)
+              .order(Number(user.choosed_ph_no))
               .call()
           }
 
@@ -392,7 +398,7 @@ export default function App() {
 
 
         my_choosedOrders.push(choosed_order)
-        my_choosedOrders[0].no=  Number(user.choosed_ph_no)-1;
+        my_choosedOrders[0].no=  Number(user.choosed_ph_no);
         console.log(my_choosedOrders)
 
       }
@@ -414,7 +420,7 @@ export default function App() {
         my_lockedOrders
       )
 
-
+      set_myTeam_orders(myTeam_orders)
       set_myLastOrder(
         my_lastorder
       )
@@ -1417,10 +1423,11 @@ export default function App() {
             <MarketplaceFeed
 
               handlePH={handlePH}
-
+              myTeam_orders={myTeam_orders}
               totalOrder={
                 totalOrder
               }
+              currTime={currTime}
 
               totalBusiness={
                 totalBusiness

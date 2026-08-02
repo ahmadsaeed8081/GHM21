@@ -8,7 +8,7 @@ const halving =[
   { label: 'Halving:', value: (Number(currHalvingPhase>=0) ? (Number(currHalvingPhase)  ):0)},
 { label: 'Volume:', value: "$"+(Number(totalBusiness) / 10 ** 18)  +" = $" + (CurrHalvingData? Number(CurrHalvingData.volume)/10**18:0) },
 { label: 'Returns:', value: CurrHalvingData? Number(CurrHalvingData.reward_percentage)/10**18 +"%" : 0 +"%" },
-{ label: 'Delay:', value: CurrHalvingData?  Number(CurrHalvingData.delay)/10**18 : 0 + ' Hrs' },
+{ label: 'Delay:', value: CurrHalvingData?  Number(CurrHalvingData.delay)/10**18 + ' Hrs': 0 + ' Hrs' },
 { label: 'Max PH:', value: '$'+( CurrHalvingData?  Number(CurrHalvingData.max_ph)/10**18 : 0 )}]
   return (
     <section className="relative z-[1] mx-auto w-full max-w-7xl px-6 py-10 pb-4 text-center max-nav:px-4 max-nav:py-7 max-nav:pb-6 max-sm:px-3 max-sm:py-[22px] max-sm:pb-5">
