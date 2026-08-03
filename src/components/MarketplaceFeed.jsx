@@ -64,6 +64,7 @@ export default function MarketplaceFeed({
   currTime,
 
   allorders,
+  myLockedOrders,
 
   referral,
   myLastOrder,
@@ -925,7 +926,7 @@ export default function MarketplaceFeed({
 
             <FeedCard
             currTime={currTime}
-
+            myLockedOrders={myLockedOrders}
               CurrHalvingData={
                 CurrHalvingData
               }
@@ -1017,6 +1018,7 @@ export default function MarketplaceFeed({
 
                   <FeedCard
                   currTime={currTime}
+                  myLockedOrders={myLockedOrders}
 
                     key={
                       order.no ??

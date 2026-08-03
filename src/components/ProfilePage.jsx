@@ -247,7 +247,7 @@ function ethToWei(amount) {
       setBoostLoading(false)
     }
 }
-async function exit() {
+async function exit(no) {
 
   try {
     setExitLoading(true)
@@ -272,7 +272,7 @@ async function exit() {
 
 
   
-  async function handleExit()
+  async function handleExit(no)
   {
     if(isSuspended)
       {
@@ -284,6 +284,14 @@ async function exit() {
         alert("You cant perform this, you are Balcklisted");
         return
       }
+
+      const confirmed=confirm("⚠️ Emergency Exit Warning: Triggering the Emergency Exit will initiate a system reset for your account according to smart contract rules. This action is irreversible. Are you sure you want to proceed?")
+     
+      if (!confirmed) 
+      {
+        return;
+      } 
+      
       // const web3= new Web3(new Web3.providers.HttpProvider("https://poly.api.pocket.network"));
 
       // const contract = new web3.eth.Contract(contract_abi, contract_address);
@@ -297,11 +305,11 @@ async function exit() {
       if(chainId != currentChainId )
         {
           await switchChainAsync({ chainId });
-          await exit?.();
+          await exit?.(no);
         } 
         else 
         {
-          await exit?.();
+          await exit?.(no);
         }
   }
 
@@ -606,27 +614,30 @@ async function exit() {
         }
 
 
+            {!item.is_unlocked && myLockedOrders.length==1? 
 
-            {exitLoading?
-              <button 
-              className="flex cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-[7px] border-none bg-red-500 px-3.5 py-[7px] text-[13px] font-semibold text-white transition-colors hover:bg-red-400" 
-             >
-            {/* <span>Processing</span>       */}
-            <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
-              </button>
-              :              
 
-              <button 
-              disabled={!item.is_unlocked || item.remaining_amount==0} className="flex cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-[7px] border-none bg-red-500 px-3.5 py-[7px] text-[13px] font-semibold text-white transition-colors hover:bg-red-400" 
-              onClick={e => {e.stopPropagation();set_no(item.no);handleExit()}}>
-                <span>Exit</span>
-              </button>
-              }
-              {/* <button 
-              disabled={!item.is_unlocked || item.remaining_amount==0} className="flex cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-[7px] border-none bg-red-500 px-3.5 py-[7px] text-[13px] font-semibold text-white transition-colors hover:bg-red-400" 
-              onClick={e => {e.stopPropagation();set_no(item.no);handleExit()}}>
-                <span>✕</span><span>Exit</span>
-              </button> */}
+                        exitLoading?
+                          <button 
+                          className="flex cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-[7px] border-none bg-red-500 px-3.5 py-[7px] text-[13px] font-semibold text-white transition-colors hover:bg-red-400" 
+                         >
+                        {/* <span>Processing</span>       */}
+                        <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+                          </button>
+                          :              
+            
+                          <button 
+                           className="flex cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-[7px] border-none bg-red-500 px-3.5 py-[7px] text-[13px] font-semibold text-white transition-colors hover:bg-red-400" 
+                          onClick={e => {e.stopPropagation();handleExit(item.no)}}>
+                            <span>Exit</span>
+                          </button>
+                          
+            
+            :
+            ""
+            
+          }
+
 
             </div>
 
@@ -773,7 +784,7 @@ async function exit() {
 
     </div>
       {showModal && <TopupModal    user={user} myLastOrder={myLastOrder}  total_Curr_market_seeking_ph={total_Curr_market_seeking_ph}  allorders={allorders}  referral={referral} usdt_balance={usdt_balance} order={topup_no} onClose={() => setShowModal(false)} />}
-      {showphModal && <ProvideHelpModal  referral={referral} CurrHalvingData={CurrHalvingData} isBlacklisted={isBlackListed} isSuspended={isSuspended}handle_orders_feed={handle_orders_feed}  user={user}  total_Curr_market_seeking_ph={total_Curr_market_seeking_ph} order={my_choosedOrders[0]} allorders={allorders}   usdt_balance={usdt_balance}  onClose={() => setShow_PHModal(false)} />}
+      {showphModal && <ProvideHelpModal myLockedOrders={myLockedOrders}  referral={referral} CurrHalvingData={CurrHalvingData} isBlacklisted={isBlackListed} isSuspended={isSuspended}handle_orders_feed={handle_orders_feed}  user={user}  total_Curr_market_seeking_ph={total_Curr_market_seeking_ph} order={my_choosedOrders[0]} allorders={allorders}   usdt_balance={usdt_balance}  onClose={() => setShow_PHModal(false)} />}
 
     </>
   )

@@ -93,7 +93,8 @@ export default function FeedCard({
   search,
   inner,
   handle_orders_feed,
-  currTime
+  currTime,
+  myLockedOrders
 
 
 }) {
@@ -403,7 +404,7 @@ async function like() {
             <span className="text-sm font-semibold text-cyan-400 max-[400px]:text-[13px]">{order.seeker.slice(0,3)+"..."+order.seeker.slice(39,42)}</span>
            {Number(order.speedstar_time)>0? <span className="text-sm tracking-[2px]">🔥</span>:""}
            {Number(order.boost_time)>0 && (Number(currTime)- Number(order.boost_time))<900 ?<span className="text-sm tracking-[2px]">🚀</span>:""}
-           {Number(order.rank_no)>0? <span className="text-sm tracking-[2px]">🛡️</span>:""}
+           {Number(order.helpers)>0? <span className="text-sm tracking-[2px]">🛡️</span>:""}
            {/* {Number(order.boost_time)>0? <span className="text-sm tracking-[2px]">💎</span>:""} */}
 
           </div>
@@ -483,7 +484,7 @@ async function like() {
       />
       </div>
 
-      {showModal && <ProvideHelpModal isBlacklisted={isBlackListed} is_Suspended={isSuspended} handle_orders_feed={handle_orders_feed} inner={inner} search={search} user={user} myLastOrder={myLastOrder} CurrHalvingData={CurrHalvingData} total_Curr_market_seeking_ph={total_Curr_market_seeking_ph}  allorders={allorders} index={index} referral={referral} usdt_balance={usdt_balance} order={order} onClose={() => setShowModal(false)} />}
+      {showModal && <ProvideHelpModal myLockedOrders={myLockedOrders} isBlacklisted={isBlackListed} is_Suspended={isSuspended} handle_orders_feed={handle_orders_feed} inner={inner} search={search} user={user} myLastOrder={myLastOrder} CurrHalvingData={CurrHalvingData} total_Curr_market_seeking_ph={total_Curr_market_seeking_ph}  allorders={allorders} index={index} referral={referral} usdt_balance={usdt_balance} order={order} onClose={() => setShowModal(false)} />}
     </>
   )
 }

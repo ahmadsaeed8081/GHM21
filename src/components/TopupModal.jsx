@@ -74,7 +74,7 @@ function ethToWei(amount) {
         await writeContractAsync({
           abi: token_abi,
           address: USDT_address,
-          args: [contract_address,( amount ? Number(amount)* 10**18 : "0")],
+          args: [contract_address,( amount ? ethToWei(amount): "0")],
           functionName: "approve",
 
         }); 
@@ -95,7 +95,7 @@ function ethToWei(amount) {
           address: contract_address,
           functionName: "Top_up", 
           args: [
-            (amount? (amount)*10**18 : 0),order?order.no:0
+            (amount? ethToWei(amount) : 0),order?order.no:0
             ],
 
         });
@@ -197,23 +197,23 @@ useEffect(()=>{
           return;
         }
 
-        if(amount > 25)
-          {
-            alert("Maximum PH smount is 25$");
-            return;
-          }
+      if(amount > (Number(order.ph_amount)/10**18)*2.5)
+        {
+          alert("Maximum PH amount is $"+(Number(order.ph_amount)/10**18)*2.5);
+          return;
+        }
 
-      // if(amount > (Number(total_Curr_market_seeking_ph)/10**18))
-      // {
-      //   alert("Kindly choose a different amount,You cant invest more than the market need "+  (Number(total_Curr_market_seeking_ph)/10**18));
-      //   return;
-      // }
+      if(amount > (Number(total_Curr_market_seeking_ph)/10**18))
+      {
+        alert("Kindly choose a different amount,You cant invest more than the market need "+  (Number(total_Curr_market_seeking_ph)/10**18));
+        return;
+      }
 
-      // if(amount > (Number(CurrHalvingData.max_ph)/10**18))
-      // {
-      //   alert("Kindly choose a different amount,You cant invest more than the current halving max PH Amount");
-      //   return;
-      // }
+      if(amount > (Number(CurrHalvingData.max_ph)/10**18))
+      {
+        alert("Kindly choose a different amount,You cant invest more than the current halving max PH Amount");
+        return;
+      }
 
 
       if( (Number(usdt_balance)/10**18) < Number(amount+(amount*2/100)) )

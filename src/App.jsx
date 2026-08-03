@@ -1492,6 +1492,7 @@ export default function App() {
               referral={
                 referral
               }
+              myLockedOrders={myLockedOrders}
 
               total_Curr_market_seeking_ph={
                 total_Curr_market_seeking_ph

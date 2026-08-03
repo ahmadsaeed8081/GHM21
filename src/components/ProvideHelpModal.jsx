@@ -32,7 +32,7 @@ import {
 
 } from "../../src/components/configs/Contracts";
 
-export default function ProvideHelpModal({ handle_orders_feed,search,inner,user,CurrHalvingData,myLastOrder,onClose,usdt_balance,order,referral,is_Suspended,isBlacklisted,allorders,index,total_Curr_market_seeking_ph }) {
+export default function ProvideHelpModal({             myLockedOrders,  handle_orders_feed,search,inner,user,CurrHalvingData,myLastOrder,onClose,usdt_balance,order,referral,is_Suspended,isBlacklisted,allorders,index,total_Curr_market_seeking_ph }) {
   const [isEditing, setIsEditing] = useState(false)
   const [amount, setAmount] = useState('$50')
   const [reason, setReason] = useState('')
@@ -203,6 +203,16 @@ useEffect(()=>{
               alert("Kindly write a Letter of Happiness to continue with system");
               return;
             }
+
+      }
+
+      if(user.ph_count>0)
+      {
+        if(amount > (Number(myLockedOrders[myLockedOrders.length-1].ph_amount)/10**18)*2.5)
+          {
+            alert("Maximum PH amount is $"+(Number(myLockedOrders[myLockedOrders.length-1].ph_amount)/10**18)*2.5);
+            return;
+          }
       }
 
       if(amount==0)
