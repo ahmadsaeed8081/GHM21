@@ -87,6 +87,7 @@ export default function ReviewModal({ onClose, onLater, onReview,is_suspended,is
       {
         next_submit();
         notify()
+        onClose()
       }
 
   

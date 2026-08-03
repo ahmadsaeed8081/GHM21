@@ -74,7 +74,7 @@ function ethToWei(amount) {
         const tx = await writeContractAsync({
           abi: token_abi,
           address: USDT_address,
-          args: [contract_address,( amount ? (Number(amount)+(Number(amount)*2/100))*10**18 : "0")],
+          args: [contract_address,( amount ? ethToWei(Number(amount)+(Number(amount)*2/100)) : "0")],
           functionName: "approve",
 
         }); 
@@ -89,13 +89,14 @@ function ethToWei(amount) {
 
   async function PH() {
 
+    // alert(ethToWei(amount) )
     try {
         const tx = await writeContractAsync({
           abi: contract_abi,
           address: contract_address,
           functionName: "Provide_Help", 
           args: [order?order.no:0,
-            (amount? (amount)*10**18 : 0),ethToWei(fee),reason,referral],
+            (amount? ethToWei(amount) : 0),ethToWei(fee),reason,referral],
 
         });
 
