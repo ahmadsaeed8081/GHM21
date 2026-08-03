@@ -181,7 +181,10 @@ function ethToWei(amount) {
 }
   // let order_no=[];
 
+  const handleTeamScroll = (e) => {
+    e.currentTarget.scrollLeft += e.deltaY;
 
+  };
     useEffect(()=>{
   
       if(isConfirmed && method==0)
@@ -372,7 +375,7 @@ async function exit(no) {
 
       <div className="grid grid-cols-2 items-start gap-3 max-profile:grid-cols-1 md:gap-4">
         <div className="flex flex-col gap-3 md:gap-4">
-          <div className={`${cardSurface} gap-3 px-5 py-5 md:min-h-[266px] md:gap-4 md:py-10 md:pr-[43px] md:pl-8`}>
+          {/* <div className={`${cardSurface} gap-3 px-5 py-5 md:min-h-[266px] md:gap-4 md:py-10 md:pr-[43px] md:pl-8`}>
             <span className="font-sans text-[13px] font-normal text-gray-500 md:text-sm">Total Team</span>
             <div className="-mx-1 flex gap-3 overflow-x-auto px-1 [-ms-overflow-style:none] [scrollbar-width:none] md:gap-3 [&::-webkit-scrollbar]:hidden">
               {refData.map(( val, index ) => (
@@ -388,8 +391,41 @@ async function exit(no) {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
 
+<div className={`${cardSurface} gap-3 px-5 py-5 md:min-h-[266px] md:gap-4 md:py-10 md:pr-[43px] md:pl-8`}>
+  
+  <span className="font-sans text-[13px] font-normal text-gray-500 md:text-sm">
+    Total Team
+  </span>
+
+  <div
+    onWheel={handleTeamScroll}
+    className="-mx-1 flex gap-3 overflow-x-auto px-1 [-ms-overflow-style:none] [scrollbar-width:none] md:gap-3 [&::-webkit-scrollbar]:hidden"
+  >
+    {refData.map((val, index) => (
+      <div
+        key={index}
+        className="flex min-w-[5.5rem] flex-1 shrink-0 flex-col items-center gap-1.5 rounded-xl border-[1.5px] border-white/[0.24] bg-white/[0.04] px-3 py-4 md:min-w-[6.5rem] md:gap-2.5 md:py-[22px]"
+      >
+        <span className="font-sans text-[28px] font-bold leading-none text-white md:text-[32px]">
+          {val.count}
+        </span>
+
+        <span className="font-sans text-[12px] text-gray-500 md:text-[13px]">
+          Level {index + 1}
+        </span>
+
+        {!val.unlocked && (
+          <span className="font-sans text-[12px] text-gray-500 md:text-[13px]">
+            🔒
+          </span>
+        )}
+      </div>
+    ))}
+  </div>
+
+</div>
           <div className={`${cardSurface} gap-3 px-5 py-5 md:min-h-[194px] md:gap-4 md:py-10 md:pr-[43px] md:pb-[50px] md:pl-8`}>
             <span className="font-sans text-[13px] font-normal text-gray-500 md:text-sm">Referral Link</span>
             <div className="flex items-center justify-between gap-3 rounded-[10px] border-[1.5px] border-white/[0.24] bg-white/[0.04] px-4 py-3">
