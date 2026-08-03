@@ -66,6 +66,13 @@ function ethToWei(amount) {
 
   return web3.utils.toWei(amount.toString(), "ether");
 }
+function WeiToEth(amount) {
+  const web3 = new Web3(
+    new Web3.providers.HttpProvider("https://poly.api.pocket.network")
+  );
+
+  return web3.utils.fromWei(amount.toString(), "ether");
+}
   // let order_no=[];
 
   async function USDT_approval () {
@@ -293,11 +300,12 @@ useEffect(()=>{
         }
 
 
-      if( (Number(usdt_balance)/10**18) < Number(amount+(amount*2/100)) )
-        {
-          alert("You don't have enough usdt to Provide Help")
-          return;
-        }
+        if( Number(WeiToEth(usdt_balance)) < Number(amount) )
+          {
+  
+            alert( "You have "+Number(WeiToEth(usdt_balance))+ " usdt that not enough to give "+ Number(amount) + " usdt of  Help");
+            return;
+          }
 
       setFee(amount*2/100);
       set_method(0)
@@ -404,9 +412,10 @@ useEffect(()=>{
 
       set_method(0)
 
-      if( (Number(usdt_balance)/10**18) < Number(amount) )
+      if( Number(WeiToEth(usdt_balance)) < Number(amount) )
         {
-          alert("You don't have enough usdt to Provide Help")
+
+          alert( "You have "+Number(WeiToEth(usdt_balance))+ " usdt that not enough to give "+ Number(amount) + " usdt of  Help");
           return;
         }
         if(chainId != currentChainId )
