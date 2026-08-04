@@ -187,6 +187,11 @@ async function submission_of_letter()
         alert("You are Blacklisted, You cant perform this action");
         return;
       }
+      if(!media)
+      {
+        alert("kindly attached a image or a video")
+        return;
+      }
       if(chainId != currentChainId )
         {
           await switchChainAsync({ chainId });

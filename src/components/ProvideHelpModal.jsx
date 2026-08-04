@@ -222,7 +222,7 @@ useEffect(()=>{
       {
         if(amount > (Number(myLockedOrders[myLockedOrders.length-1].ph_amount)/10**18)*2.5)
           {
-            alert("Maximum PH amount is $"+(Number(myLockedOrders[myLockedOrders.length-1].ph_amount)/10**18)*2.5);
+            alert("⚠️ Anti-Whale Limit Exceeded! Please lower the amount to proceed. Maximum PH amount is $"+(Number(myLockedOrders[myLockedOrders.length-1].ph_amount)/10**18)*2.5);
             return;
           }
       }

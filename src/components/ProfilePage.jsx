@@ -288,7 +288,7 @@ async function exit(no) {
         return
       }
 
-      const confirmed=confirm("⚠️ Emergency Exit Warning: Triggering the Emergency Exit will initiate a system reset for your account according to smart contract rules. This action is irreversible. Are you sure you want to proceed?")
+      const confirmed=confirm("🚨 Confirm Emergency Exit! This action resets your account and cannot be undone. Proceed??")
      
       if (!confirmed) 
       {
