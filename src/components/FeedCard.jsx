@@ -404,8 +404,9 @@ async function like() {
             <span className="text-sm font-semibold text-cyan-400 max-[400px]:text-[13px]">{order.seeker.slice(0,3)+"..."+order.seeker.slice(39,42)}</span>
            {Number(order.speedstar_time)>0? <span className="text-sm tracking-[2px]">🔥</span>:""}
            {Number(order.boost_time)>0 && (Number(currTime)- Number(order.boost_time))<900 ?<span className="text-sm tracking-[2px]">🚀</span>:""}
-           {Number(order.helpers)>0? <span className="text-sm tracking-[2px]">🛡️</span>:""}
-           {/* {Number(order.boost_time)>0? <span className="text-sm tracking-[2px]">💎</span>:""} */}
+           {Number(order.remaining_amount) < Number(order.ph_amount) + Number(order.reward_amount)? <span className="text-sm tracking-[2px]">🌓</span>:""}
+           {(Number(order.remaining_amount))>=10*10**18 && (Number(order.remaining_amount))<100*10**18? <span className="text-sm tracking-[2px]">⚡</span>:""}
+           {order.is_partialExit ? <span className="text-sm tracking-[2px]">📉</span>:""}
 
           </div>
           <span className="text-[11px] text-gray-500"></span>

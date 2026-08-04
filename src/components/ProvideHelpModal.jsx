@@ -193,6 +193,11 @@ useEffect(()=>{
         alert("You are Blacklisted, You cant perform this action");
         return;
       }
+      if(Number(user.rank_no) == 4  )
+        {
+          alert("You can't perform this, You have exited the system");
+          return
+        }
       if(myLastOrder!=null)
       {
         if(myLastOrder.remaining_amount>0 && user.ph_count>=2)
@@ -383,12 +388,12 @@ useEffect(()=>{
           alert("You can only join using a refer link");
           return;
         }
+      if(Number(user.rank_no) == 4  )
+        {
+          alert("You can't perform this, You have exited the system");
+          return
+        }
 
-      // if(myLastOrder.close_time>0 && user.ph_count>=2 && !myLastOrder.letter)
-      //   {
-      //     alert("Kindly write a Letter of Happiness to continue with system");
-      //     return;
-      //   }
 
         if(myLastOrder!=null)
           {

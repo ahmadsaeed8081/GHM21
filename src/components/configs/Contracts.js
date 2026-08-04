@@ -1,7 +1,7 @@
 
 export const USDT_address="0x1E537F8BD3228d4EfBF20bD837a48a96649A8D5A"
-export const contract_address="0x3aaddf85846C36d80A536e9Aa470DCEDe4912C47"
-export const school_contract_address="0x0A8599cFfBF766433468F5FF3fe28A264a172FFe"
+export const contract_address="0x42c2167Abf8a146783Da9e6411B7eF6698683354"
+export const school_contract_address="0xDf1dF7Ae324ADEEa7626E586788ef8962074C659"
 export const token_abi=[
 	{
 		"anonymous": false,
@@ -499,6 +499,11 @@ export const contract_abi=[
 						"internalType": "uint256",
 						"name": "speedstar_time",
 						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "is_partialExit",
+						"type": "bool"
 					}
 				],
 				"internalType": "struct GHM21.FeedOrder[]",
@@ -605,6 +610,11 @@ export const contract_abi=[
 						"internalType": "uint256",
 						"name": "speedstar_time",
 						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "is_partialExit",
+						"type": "bool"
 					}
 				],
 				"internalType": "struct GHM21.FeedOrder[]",
@@ -757,6 +767,11 @@ export const contract_abi=[
 						"internalType": "uint256",
 						"name": "speedstar_time",
 						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "is_partialExit",
+						"type": "bool"
 					}
 				],
 				"internalType": "struct GHM21.FeedOrder[]",
@@ -824,6 +839,25 @@ export const contract_abi=[
 			{
 				"internalType": "bool",
 				"name": "decision",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "isPartialOrder",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
 				"type": "bool"
 			}
 		],
@@ -1035,6 +1069,11 @@ export const contract_abi=[
 						"internalType": "uint256",
 						"name": "speedstar_time",
 						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "is_partialExit",
+						"type": "bool"
 					}
 				],
 				"internalType": "struct GHM21.FeedOrder[]",

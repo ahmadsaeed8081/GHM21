@@ -819,7 +819,7 @@ async function exit(no) {
 
 
     </div>
-      {showModal && <TopupModal    user={user} myLastOrder={myLastOrder}  total_Curr_market_seeking_ph={total_Curr_market_seeking_ph}  allorders={allorders}  referral={referral} usdt_balance={usdt_balance} order={topup_no} onClose={() => setShowModal(false)} />}
+      {showModal && <TopupModal   CurrHalvingData={CurrHalvingData}   user={user} myLastOrder={myLastOrder}  total_Curr_market_seeking_ph={total_Curr_market_seeking_ph}  allorders={allorders}  referral={referral} usdt_balance={usdt_balance} order={topup_no} onClose={() => setShowModal(false)} />}
       {showphModal && <ProvideHelpModal myLockedOrders={myLockedOrders}  referral={referral} CurrHalvingData={CurrHalvingData} isBlacklisted={isBlackListed} isSuspended={isSuspended}handle_orders_feed={handle_orders_feed}  user={user}  total_Curr_market_seeking_ph={total_Curr_market_seeking_ph} order={my_choosedOrders[0]} allorders={allorders}   usdt_balance={usdt_balance}  onClose={() => setShow_PHModal(false)} />}
 
     </>
