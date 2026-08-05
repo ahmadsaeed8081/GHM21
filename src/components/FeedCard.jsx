@@ -230,6 +230,10 @@ async function like() {
       alert("Kindly Connect your wallet");
       return
     }
+    if(order.exit_fee>0)
+      {
+        return;
+      }
     if(user.ph_count==0)
       {
         alert("only registered members can do this, kindly do one PH to become a registered member");
@@ -250,6 +254,7 @@ async function like() {
           alert("You cant like yourself");
           return
         }
+
       if(Number(user.rank_no) == 4  )
         {
           alert("You cant perform this, you exit the system");
@@ -419,8 +424,9 @@ async function like() {
             <span className="px-1 text-gray-700">|</span>
             <span>👥 {Number(order.total_team)}</span>
             <span className="px-1 text-gray-700">|</span>
-            <span  onClick={e => { e.stopPropagation(); handleLike(); }}>👍 </span> <span>{Number(order.likes)}</span>
-          </div>
+            <span              className={` disabled:cursor-not-allowed disabled:opacity-40 disabled:saturate-50`}
+           disabled={order.rank_no==4}  onClick={e => { e.stopPropagation(); handleLike(); }}>👍 </span> <span>{Number(order.likes)}</span>
+          </div>  
           <p
             className={`text-[13px] leading-[1.5] text-gray-400 ${
               expanded ? '' : 'hidden'
