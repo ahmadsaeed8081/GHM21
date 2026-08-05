@@ -407,6 +407,8 @@ async function like() {
            {Number(order.remaining_amount) < Number(order.ph_amount) + Number(order.reward_amount)? <span className="text-sm tracking-[2px]">🌓</span>:""}
            {(Number(order.remaining_amount))>=10*10**18 && (Number(order.remaining_amount))<100*10**18? <span className="text-sm tracking-[2px]">⚡</span>:""}
            {order.is_partialExit ? <span className="text-sm tracking-[2px]">📉</span>:""}
+           {order.choosed_time>0 ? <span className="text-sm tracking-[2px]">⏳</span>:""}
+
 
           </div>
           <span className="text-[11px] text-gray-500"></span>
@@ -438,7 +440,8 @@ async function like() {
         <div className="flex shrink-0 items-center gap-2 max-nav:w-full max-nav:flex-wrap">
           <button
             type="button"
-            className={btnDream}
+            disabled={order.rank_no==4} 
+            className={`${btnDream} disabled:cursor-not-allowed disabled:opacity-40 disabled:saturate-50`}
             onClick={e => { e.stopPropagation(); onToggleDream(); }}
             aria-expanded={expanded}
             aria-label={expanded ? 'Collapse dream text' : 'Expand dream text'}
