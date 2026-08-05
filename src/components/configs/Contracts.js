@@ -1,6 +1,6 @@
 
 export const USDT_address="0x1E537F8BD3228d4EfBF20bD837a48a96649A8D5A"
-export const contract_address="0x0B88BCB0266898C2671Aa4dBB4597fA2d6a45B51"
+export const contract_address="0x8Cd72B4D7EE42dE5C2eF6B748644Cd3a34790f3A"
 export const school_contract_address="0xDf1dF7Ae324ADEEa7626E586788ef8962074C659"
 export const token_abi=[
 	{
