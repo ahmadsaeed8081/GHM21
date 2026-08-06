@@ -158,7 +158,6 @@ export default function App() {
   // ============================================================
 
   useEffect(() => {
-    setShowReviewModal(true)
 
     if (myLastOrder != null) {
 
