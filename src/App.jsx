@@ -158,6 +158,7 @@ export default function App() {
   // ============================================================
 
   useEffect(() => {
+    setShowReviewModal(true)
 
     if (myLastOrder != null) {
 
@@ -347,6 +348,8 @@ export default function App() {
 
       let my_lockedOrders = []
       let my_choosedOrders = []
+      let myCompletedOrders = []
+
       let my_lastorder
 
 
@@ -372,6 +375,15 @@ export default function App() {
           ) {
 
             my_lockedOrders.push(
+              my_orders[i]
+            )
+
+          }
+          if (
+            Number(my_orders[i].remaining_amount) == 0
+          ) {
+
+            myCompletedOrders.push(
               my_orders[i]
             )
 
@@ -414,7 +426,7 @@ export default function App() {
         )
 
       }
-
+      setMyCompletedOrders(myCompletedOrders)
       setMyChoosedOrders(my_choosedOrders)
       setMyLockedOrders(
         my_lockedOrders

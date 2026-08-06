@@ -2,7 +2,9 @@ export default function HeroStats({ CurrHalvingData,currHalvingPhase,totalBusine
 
   // console.log("helloo "+currHalvingPhase)
   // console.log(typeof currHalvingPhase);
-
+  function secondsToHours(seconds) {
+    return Number((Number(seconds) / 3600).toFixed(2));
+  }
   
 const halving =[ 
   { label: 'Halving:', value: (Number(currHalvingPhase>=0) ? (Number(currHalvingPhase)  ):0)},
@@ -26,13 +28,13 @@ const halving =[
 
 // { label: 'Volume:', value: "$"+ 0  +" = $" + (CurrHalvingData? Number(CurrHalvingData.volume)/10**18:0) },
 { label: 'Returns:', value: CurrHalvingData? Number(CurrHalvingData.reward_percentage)/10**18 +"%" : 0 +"%" },
-{ label: 'Delay:', value: CurrHalvingData?  Number(CurrHalvingData.delay)/10**18 + ' Hrs': 0 + ' Hrs' },
+{ label: 'Delay:', value: CurrHalvingData?  secondsToHours(Number(CurrHalvingData.delay)) + ' Hrs': 0 + ' Hrs' },
 { label: 'Max PH:', value: '$'+( CurrHalvingData?  Number(CurrHalvingData.max_ph)/10**18 : 0 )}]
   return (
     <section className="relative z-[1] mx-auto w-full max-w-7xl px-6 py-10 pb-4 text-center max-nav:px-4 max-nav:py-7 max-nav:pb-6 max-sm:px-3 max-sm:py-[22px] max-sm:pb-5">
       <div className="mb-5 flex items-baseline justify-center gap-2 max-sm:flex-wrap max-sm:gap-1">
         <span className="text-[clamp(32px,5vw,52px)] font-bold leading-none tracking-tight text-green max-sm:text-[28px]">
-        {Number(totalBusiness)/10**18}
+        {(Number(totalBusiness)/10**18).toFixed(2)}
         </span>
         <span className="text-[clamp(28px,4vw,46px)] font-bold leading-none tracking-wide text-white max-sm:text-[24px]">
           
@@ -50,14 +52,14 @@ const halving =[
           <div
             className="absolute inset-y-0 left-0 rounded-full"
             style={{
-              width: `${(((Number(totalBusiness) / 10 ** 18) / 21000000) * 100)}%`,
+              width: `${(((Number(totalBusiness) / 10 ** 18) / 2100) * 100)}%`,
               background: 'linear-gradient(90deg, #00e676 0%, #00c896 40%, #3b82f6 100%)',
             }}
           />
           <span className="relative z-[1] ml-4   w-full text-center text-[13px] font-medium text-gray-300">
           Halving progress:{" "}
 {parseFloat(
-  ((((Number(totalBusiness) / 10 ** 18) / 21000000) * 100).toFixed(5))
+  ((((Number(totalBusiness) / 10 ** 18) / 2100) * 100).toFixed(5))
 )}
 %          </span>
         </div>

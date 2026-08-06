@@ -336,7 +336,10 @@ async function like() {
   return (
     <>
     
-      <div className="flex items-start gap-4 rounded-2xl border border-white/[0.12] bg-white/[0.04] px-5 py-2 transition-[border-color] hover:border-white/[0.22] max-nav:flex-col max-nav:gap-2.5 max-nav:rounded-[20px] max-nav:p-[18px] max-sm:gap-2.5 max-sm:p-4 cursor-pointer" onClick={onToggleDream}>
+      <div className={`flex items-start gap-4 rounded-2xl border border-white/[0.12] bg-white/[0.04] px-5 py-2 transition-[border-color] hover:border-white/[0.22] max-nav:flex-col max-nav:gap-2.5 max-nav:rounded-[20px] max-nav:p-[18px] max-sm:gap-2.5 max-sm:p-4 cursor-pointer ${
+              order.exit_fee>0 ? "tw-bg-black opacity-40" : "bg-white/20"
+      }`} 
+      onClick={onToggleDream}>
         {/* Avatar - desktop only */}
 
 
@@ -382,7 +385,7 @@ async function like() {
 
           {Number(order.rank_no)==4 ?          
 
-<div className="flex nav:hidden h-[50px] w-[50px] items-center justify-center rounded-full border-2 border-red-900 bg-red-950">
+<div className={`flex nav:hidden h-[50px] w-[50px] items-center justify-center rounded-full border-2 border-red-900 bg-red-950`}>
 <svg
               width="20"
               height="20"
@@ -413,18 +416,19 @@ async function like() {
            {(Number(order.remaining_amount))>=10*10**18 && (Number(order.remaining_amount))<100*10**18? <span className="text-sm tracking-[2px]">⚡</span>:""}
            {order.is_partialExit ? <span className="text-sm tracking-[2px]">📉</span>:""}
            {order.choosed_time>0 ? <span className="text-sm tracking-[2px]">⏳</span>:""}
+           {/* {order.is_exam_passed>0 ? <span className="text-sm tracking-[2px]">🌻</span>:""} */}
 
 
           </div>
           <span className="text-[11px] text-gray-500"></span>
           <div className="mt-0.5 flex flex-wrap items-center gap-0.5 text-[13px] text-white max-[400px]:text-xs">
-            <span>PH: ${Number(order.total_ph)/10**18}</span>
+            <span>PH: ${(Number(order.total_ph)/10**18).toFixed(2)}</span>
             <span className="px-1 text-gray-700">|</span>
-            <span>GH: ${Number(order.total_gh)/10**18}</span>
+            <span>GH: ${(Number(order.total_gh)/10**18).toFixed(2)}</span>
             <span className="px-1 text-gray-700">|</span>
             <span>👥 {Number(order.total_team)}</span>
             <span className="px-1 text-gray-700">|</span>
-            <span              className={` disabled:cursor-not-allowed disabled:opacity-40 disabled:saturate-50`}
+            <span className={` disabled:cursor-not-allowed disabled:opacity-40 disabled:saturate-50`}
            disabled={order.rank_no==4}  onClick={e => { e.stopPropagation(); handleLike(); }}>👍 </span> <span>{Number(order.likes)}</span>
           </div>  
           <p

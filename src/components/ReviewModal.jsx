@@ -165,12 +165,34 @@ async function submission_of_letter()
 
 
   async function handleSubmit() { 
-
+    const MAX_IMAGE_SIZE = 2 * 1024 * 1024; // 10 MB
+    const MAX_VIDEO_SIZE = 10 * 1024 * 1024; // 20 MB
     if(review.length<25)
     {
       alert("kindly write a letter that contain atleast 25 characters ")
       return
     }
+    if (media.type.startsWith("image/")) {
+      if (media.size > MAX_IMAGE_SIZE)
+      {
+        alert("Image size must be less than 2 MB.");
+        return;
+      }
+    }
+    if (media.type.startsWith("video/")) {
+  
+      if (media.size > MAX_VIDEO_SIZE ) {
+        alert("Video size must be less than 10 MB.");
+        return;
+      }
+    }
+      if (media.type.startsWith("image/")) {
+        if (media.size > MAX_IMAGE_SIZE)
+        {
+          alert("Image size must be less than 2 MB.");
+          return;
+        }
+      }
     if(isDisconnected)
       {
         alert("Kindly Connect your wallet");
@@ -213,10 +235,6 @@ async function submission_of_letter()
     {
 
 
-      const MAX_IMAGE_SIZE = 2 * 1024 * 1024; // 10 MB
-      const MAX_VIDEO_SIZE = 10 * 1024 * 1024; // 20 MB
-
-
       const BOT_TOKEN = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
       const GROUP_ID = import.meta.env.VITE_TELEGRAM_GROUP_ID;
 
@@ -250,12 +268,7 @@ async function submission_of_letter()
   
       // Case 2: Image
       if (media.type.startsWith("image/")) {
-        
-        // if (file.size > MAX_IMAGE_SIZE)
-        // {
-        //   alert("Image size must be less than 2 MB.");
-        //   return;
-        // }
+
 
         const formData = new FormData();
   
@@ -280,10 +293,6 @@ async function submission_of_letter()
       // Case 3: Video
       if (media.type.startsWith("video/")) {
   
-        // if (file.size > MAX_VIDEO_SIZE ) {
-        //   alert("Video size must be less than 10 MB.");
-        //   return;
-        // }
 
         const formData = new FormData();
   

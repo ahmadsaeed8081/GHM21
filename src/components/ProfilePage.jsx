@@ -359,12 +359,14 @@ async function exit(no) {
 
   return (
     <>
-    <div className="mx-auto flex w-full max-w-[1100px] flex-col gap-3 px-4 py-4 pb-12 md:gap-4 md:px-6 md:py-5">
-      <div className="grid grid-cols-3 gap-3 max-md:grid-cols-1 md:gap-4">
+    <div className="mx-auto flex w-full max-w-[1100px] flex-col gap-4 px-4 py-4 pb-12 md:gap-4 md:px-6 md:py-5">
+      <div className="grid grid-cols-4 gap-4 max-md:grid-cols-1 md:gap-4">
         {[
-          { label: 'Total PH', value: "$"+(user!=null ? Number(user.Total_Ph)/10**18:0 )},
-          { label: 'Total GH', value:"$"+( user!=null ?Number(user.Total_GH)/10**18:0 )},
+          { label: 'Total PH', value: "$"+(user!=null ? (Number(user.Total_Ph)/10**18).toFixed(2):0 )},
+          { label: 'Total GH', value:"$"+( user!=null ?(Number(user.Total_GH)/10**18).toFixed(2):0 )},
           { label: 'Total Team', value: (user!=null ?Number(user.total_team):0 )},
+          { label: 'Team Volume', value: (user!=null ?(Number(user.totalteam_business)/10**18).toFixed(2):0 )},
+
         ].map(({ label, value }) => (
           <div key={label} className={`${cardSurface} gap-1.5 px-5 py-5 md:h-[174px] md:gap-2.5 md:py-10 md:pr-[43px] md:pl-8`}>
             <span className="font-sans text-[13px] font-normal text-gray-500 md:text-sm">{label}</span>
@@ -436,7 +438,25 @@ async function exit(no) {
                 <CopyIcon onClick={() => copyToClipboard( `${window.location.origin}/?ref=${address}`)} />
               </button>
             </div>
+{
+  user.upliner!="0x0000000000000000000000000000000000000000"?
+  <>
+  <span className="font-sans text-[13px] font-normal text-gray-500 md:text-sm">Upliner Address</span>
+  <div className="flex items-center justify-between gap-3 rounded-[10px] border-[1.5px] border-white/[0.24] bg-white/[0.04] px-4 py-3">
+  <span className="font-sans text-[13px] font-normal text-gray-300 md:text-sm">
+{ user.upliner? user.upliner:0}</span>              
+
+<button onClick={() => copyToClipboard( `${user.upliner}`)} className="flex shrink-0 cursor-pointer items-center border-none bg-transparent text-teal transition-opacity hover:opacity-70">
+      <CopyIcon onClick={() => copyToClipboard( `${user.upliner}`)} />
+    </button> 
+  </div>
+  </>:""
+}
+
+
           </div>
+
+          
         </div>
 
         <div className="flex flex-col gap-3 md:gap-4">
@@ -529,26 +549,6 @@ async function exit(no) {
 }
 
 
-{/* <>
-            <span className="font-sans text-[13px] font-normal text-gray-500 md:text-sm">
-              Guider School: <span className="text-teal font-semibold">PASSED</span> (100% Score)
-            </span>
-
-            <div className="flex items-center mb-2 mt-1 justify-center">
-                <button
-                  type="button"
-                  className="flex w-full items-center justify-center gap-3 rounded-2xl border-[1.5px] border-white/90 bg-transparent px-4 py-4 font-sans text-center text-[15px] font-medium leading-tight text-white transition-colors hover:bg-white/[0.06] md:py-5 md:text-[18px]"
-                  onClick={  
-                    ()=>setShowCertificate(true)
-                  }
-                >
-                  <span className="flex h-7 w-7 items-center justify-center rounded-full border border-white/80 text-white">
-                    ↓
-                  </span>
-                  Download Blockchain Certificate
-                </button>
-              </div>
-          </> */}
 
 
 
@@ -697,6 +697,64 @@ async function exit(no) {
           </div>
         ))}
       </div>
+
+
+      {myCompletedOrders.length>0?(      <h2 className="mt-1 font-sans text-[26px] font-bold text-white md:mt-3"> Completed Helps</h2>
+):("")}
+      <div className="flex flex-col gap-3">
+        {myCompletedOrders.map((item, i) => (
+          <div
+            key={i}
+            className={` box-border flex min-h-[142px] cursor-pointer items-center justify-between gap-4 rounded-3xl border-[1.5px] border-white/[0.24] bg-white/[0.12] p-6 max-md:flex-col max-md:items-start${
+              item.is_unlocked ? "tw-bg-black opacity-40" : "bg-white/20"
+            } `}
+            onClick={() => toggleExpand(i)}
+          >
+<div>
+<div className="grid grid-cols-3 gap-1 max-sm:gap-0.5">
+
+  <div className="flex flex-col gap-1">
+    <span className="font-sans text-[11px] font-medium uppercase tracking-wide text-gray-500">
+      Invest
+    </span>
+    <span className="font-sans text-[15px] font-semibold leading-none text-white">
+      ${Number(item.ph_amount) / 10**18}
+    </span>
+  </div>
+
+  <div className="flex flex-col gap-1">
+    <span className="font-sans text-[11px] font-medium uppercase tracking-wide text-gray-500">
+      Earned
+    </span>
+    <span className="font-sans text-[15px] font-semibold leading-none text-teal">
+      ${Number(item.reward_amount) / 10**18}
+    </span>
+  </div>
+
+  {/* <div className="flex flex-col gap-1">
+    <span className="font-sans text-[11px] font-medium uppercase tracking-wide text-gray-500">
+      Remaining
+    </span>
+    <span className="font-sans text-[16px] font-bold leading-none text-green">
+      ${Number(item.remaining_amount) / 10**18}
+    </span>
+  </div> */}
+
+</div>
+<p className={`font-sans text-[13px] font-normal leading-relaxed text-gray-500 ${ expandedItems[i] ? '' : 'hidden' }`} > {item.Dream} </p>
+
+</div>
+
+
+
+
+          </div>
+        ))}
+      </div>
+
+
+
+
 
       {my_choosedOrders.length>0?(      <h2 className="mt-1 font-sans text-[26px] font-bold text-white md:mt-3">Your choosed Helps</h2>
 ):("")}
