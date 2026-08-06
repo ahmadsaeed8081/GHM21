@@ -172,7 +172,15 @@ const LABELS = ['A', 'B', 'C', 'D']
 
 export default function SchoolPage({user}) {
   const [view, setView] = useState('study')
-  const [selected, setSelected] = useState([])
+  const [selected, setSelected] = useState(
+    [
+      0, 1, 2, 1, 2, 0, 1, 2, 1, 0, 1, 3,
+      2, 2, 3, 1, 2, 0, 2, 0, 1, 1, 2, 3,
+      1, 1, 2, 2, 0, 1, 1, 3, 2, 2, 0, 0,
+      2, 0, 2, 2, 3, 0, 2, 0, 1, 2, 1, 1,
+      0, 3, 1, 0, 2, 2, 1, 1, 2, 1, 2, 3,
+      1, 2, 2, 1, 0, 3, 2, 1, 1, 1, 2, 3
+    ])
   const [score, setScore] = useState(null)
   const [wrongIdx, setWrongIdx] = useState([])
   const [count, set_count] = useState([])
@@ -261,7 +269,7 @@ const { switchChainAsync } = useSwitchChain();
 
    async function handleSubmit() 
   {
-    alert(user.is_exam_passed)
+    // alert(user.is_exam_passed)
     if(!isConnected)
     {
       alert("kindly connect your wallet")
