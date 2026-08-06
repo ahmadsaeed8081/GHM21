@@ -172,7 +172,7 @@ const LABELS = ['A', 'B', 'C', 'D']
 
 export default function SchoolPage({user}) {
   const [view, setView] = useState('study')
-  const [selected, setSelected] = useState()
+  const [selected, setSelected] = useState([])
   const [score, setScore] = useState(null)
   const [wrongIdx, setWrongIdx] = useState([])
   const [count, set_count] = useState([])
