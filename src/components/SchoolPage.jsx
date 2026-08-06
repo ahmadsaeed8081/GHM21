@@ -196,7 +196,6 @@ export default function SchoolPage({user}) {
 
 
   const [method, set_method] = useState(0);
-  const [no, set_no] = useState(0);
 
 const { switchChainAsync } = useSwitchChain();
   const { writeContractAsync,writeContract,data:hash, ...states } = useWriteContract();
