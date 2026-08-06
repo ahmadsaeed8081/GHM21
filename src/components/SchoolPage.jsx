@@ -256,11 +256,16 @@ const { switchChainAsync } = useSwitchChain();
   const total = questions.length
   const answered = Object.keys(selected).length
 
-  const handleSelect = (qi, oi) => setSelected(prev => ({ ...prev, [qi]: oi }))
-
+  const handleSelect = (qi, oi) => {
+    setSelected(prev => {
+      const updated = [...prev];
+      updated[qi] = oi;
+      return updated;
+    });
+  };
    async function handleSubmit() 
   {
-    // alert(user.is_exam_passed)
+    console.log(selected)
     if(!isConnected)
     {
       alert("kindly connect your wallet")
