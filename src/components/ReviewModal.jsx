@@ -80,6 +80,7 @@ export default function ReviewModal({ onClose, onLater, onReview,is_suspended,is
       {
         set_count(0)
         notify()
+        onClose()
 
       }
     }
