@@ -372,7 +372,15 @@ async function exit(no) {
 
   return (
     <>
+
+
     <div className="mx-auto flex w-full max-w-[1100px] flex-col gap-4 px-4 py-4 pb-12 md:gap-4 md:px-6 md:py-5">
+    {myLastOrder && Number(myLastOrder.remaining_amount)==0 && Number(currTime) > (Number  (myLastOrder.close_time) + 1800)? 
+            <NotificationTimer
+            initialSeconds={ (Number(myLastOrder.close_time) + 1800)- Number(currTime) }
+            message="Recommit within this Time Period will make you a speedstar"
+          />:""
+    }
       <div className="grid grid-cols-4 gap-4 max-md:grid-cols-1 md:gap-4">
         {[
           { label: 'Total PH', value: "$"+(user!=null ? (Number(user.Total_Ph)/10**18).toFixed(2):0 )},
@@ -569,12 +577,7 @@ async function exit(no) {
           </div>
         </div>
       </div>
-      {myLastOrder && Number(myLastOrder.remaining_amount)==0 && Number(currTime) < (Number  (myLastOrder.close_time) + 1800)? 
-            <NotificationTimer
-            initialSeconds={ (Number(myLastOrder.close_time) + 1800)- Number(currTime) }
-            message="Recommit within this Time Period will make you a speedstar"
-          />:""
-    }
+ 
 
       <h2 className="mt-1 font-sans text-[26px] font-bold text-white md:mt-3">Your Recent Helps</h2>
 
