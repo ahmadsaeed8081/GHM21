@@ -465,7 +465,7 @@ async function like() {
               className={`w-2 h-[6px] transition-transform duration-200 ${expanded ? 'rotate-180' : ''}`}
             />
           </button>
-          <button  disabled={Number(currTime) < Number(order.halvinf_delay)} className={btnProvide} onClick={e => { e.stopPropagation(); setShowModal(true); }}>
+          <button  disabled={Number(currTime) < Number(order.halving_delay)} className={`${btnProvide} disabled:cursor-not-allowed disabled:opacity-40 disabled:saturate-50`} onClick={e => { e.stopPropagation(); setShowModal(true); }}>
           🤝
             <span>Provide Help</span>
           </button>
@@ -480,7 +480,7 @@ async function like() {
         </button>
 
           ):(
-            <button disabled={order.rank_no==4 || Number(currTime) < Number(order.halvinf_delay)}  className={`${btnBoost} disabled:cursor-not-allowed disabled:opacity-40 disabled:saturate-50`} onClick={e => {e.stopPropagation(); HandleBoost();}}>
+            <button disabled={order.rank_no==4 || Number(currTime) < Number(order.halving_delay)}  className={`${btnBoost} disabled:cursor-not-allowed disabled:opacity-40 disabled:saturate-50`} onClick={e => {e.stopPropagation(); HandleBoost();}}>
             <img src={boost} alt="boost" className="w-4 h-4" />
             <span>Boost</span>
           </button>
