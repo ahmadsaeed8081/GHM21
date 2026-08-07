@@ -441,9 +441,9 @@ async function like() {
         </div>
 
         {/* Price */}
-        <div className="flex flex-1 justify-center items-center max-nav:flex-none">
-          <span className="text-sm text-white">Seeking:</span>
-          <span className="whitespace-nowrap text-[20px] font-bold text-white max-nav:text-[18px]">${Number(order.remaining_amount)/10**18}</span>
+        <div className="flex flex-1 justify-center gap-1 items-center max-nav:flex-none">
+          <span className="text-sm text-white ">Seeking: </span>
+          <span className="whitespace-nowrap text-[20px] font-bold text-white max-nav:text-[18px]"> ${Number(order.remaining_amount)/10**18}</span>
         </div>
 
         {/* Buttons */}

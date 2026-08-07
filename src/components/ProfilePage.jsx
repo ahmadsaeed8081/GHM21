@@ -733,12 +733,12 @@ async function exit(no) {
 
   {/* <div className="flex flex-col gap-1">
     <span className="font-sans text-[11px] font-medium uppercase tracking-wide text-gray-500">
-      Remaining
+      Date
     </span>
     <span className="font-sans text-[16px] font-bold leading-none text-green">
-      ${Number(item.remaining_amount) / 10**18}
+      ${Number(item.create_time) / 10**18}
     </span>
-  </div> */}
+  </div>  */}
 
 </div>
 <p className={`font-sans text-[13px] font-normal leading-relaxed text-gray-500 ${ expandedItems[i] ? '' : 'hidden' }`} > {item.Dream} </p>
