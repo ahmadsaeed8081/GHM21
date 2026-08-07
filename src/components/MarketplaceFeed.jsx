@@ -487,7 +487,7 @@ export default function MarketplaceFeed({
       ) {
 
         if (
-          all_orders[i].is_unlocked
+          all_orders[i].is_unlocked && currTime > all_orders[i].halving_delay
         ) {
 
           temp =
