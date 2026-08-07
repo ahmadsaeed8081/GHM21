@@ -265,7 +265,7 @@ const { switchChainAsync } = useSwitchChain();
   };
    async function handleSubmit() 
   {
-    console.log(selected)
+    // console.log(selected)
     if(!isConnected)
     {
       alert("kindly connect your wallet")

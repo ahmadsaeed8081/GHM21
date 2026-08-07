@@ -21,7 +21,7 @@ import {
 import { toPng } from "html-to-image";
 import html2canvas from "html2canvas";
 
-export default function Certificate({ onClose, user, userName }) {
+export default function Certificate({ onClose, user, userName,handlePH }) {
 
   const [method, set_method] = useState(0);
 
@@ -57,7 +57,7 @@ export default function Certificate({ onClose, user, userName }) {
       if (count == 1) {
         set_count(0)
         notify()
-
+        handlePH();
       }
     }
 
@@ -65,7 +65,7 @@ export default function Certificate({ onClose, user, userName }) {
   }, [isConfirmed])
 
   useEffect(() => {
-    if (!userName) return;
+    if (userName=="") { return;};
   
     const timer = setTimeout(async () => {
       setIsDownloading(true);
@@ -74,7 +74,7 @@ export default function Certificate({ onClose, user, userName }) {
       await new Promise(resolve => requestAnimationFrame(resolve));
   
       await downloadCertificate();
-  
+      onClose(true)
       setIsDownloading(false);
     }, 300);
   
@@ -253,7 +253,7 @@ export default function Certificate({ onClose, user, userName }) {
           ✕
         </button>
 
-        {user.is_exam_passed  && userName==="" && (
+        {user.is_exam_passed  && userName=="" ? (
           <div className="mb-8 w-full max-w-[920px] rounded-[14px] border border-[#1c352d] bg-[#081310] p-6 font-sans text-[#dff2ea]">
 
             <h2 className="mb-4 text-[13px] font-bold uppercase tracking-[0.14em] text-[#37e8a4]">
@@ -295,125 +295,129 @@ export default function Certificate({ onClose, user, userName }) {
             </p>
 
           </div>
+        ):
+        (
+          <div
+
+          id="certificate"
+          className="z-[-0890890] relative w-[940px] max-w-full rounded-[18px] p-[2px] shadow-[0_40px_90px_rgba(0,0,0,0.55)] bg-[radial-gradient(ellipse_700px_300px_at_50%_0%,rgba(43,199,236,0.10),transparent_60%),linear-gradient(180deg,#0d1a17,#0f201b)] before:content-[''] before:absolute before:inset-0 before:rounded-[18px] before:p-[2px] before:opacity-55 before:bg-[linear-gradient(135deg,#37e8a4,transparent_30%,transparent_70%,#2bc7ec)] before:[mask:linear-gradient(#000_0_0)_content-box,linear-gradient(#000_0_0)] before:[mask-composite:exclude] before:[-webkit-mask-composite:xor]"
+        >
+          <div className="relative rounded-[16px] pt-10 px-[46px] pb-0 bg-[linear-gradient(180deg,rgba(5,15,13,0.4),rgba(5,15,13,0.85))]">
+  
+            <div className="flex flex-col items-center gap-[10px] mb-[6px]">
+              <img className="h-14" src={logo} alt="GHM21" />
+            </div>
+  
+            <div className="text-center font-mono text-[10.5px] tracking-[0.18em] text-[#7fa89a] uppercase mt-[2px] mb-[22px]">
+              Decentralized Governance · P2P Protocol Framework · Verification System
+            </div>
+  
+            <div className="h-px mb-[26px] bg-[linear-gradient(90deg,transparent,#37e8a4,#2bc7ec,transparent)] opacity-55" />
+  
+            <div className="text-center font-['Orbitron'] text-[15px] font-bold uppercase tracking-[0.22em] mb-[10px]  bg-clip-text text-white">
+              Certificate of Accomplishment
+            </div>
+  
+            <div className="text-center text-sm text-[#7fa89a] mb-5 tracking-[0.02em]">
+              This on-chain credential officially verifies that:
+            </div>
+  
+            <div
+              className="text-center font-['Orbitron'] font-bold text-[38px] max-[640px]:text-[28px] tracking-[0.02em] mt-1 mb-[14px] leading-[1.25] break-words text-[linear-gradient(180deg,#f2f4f6_20%,#9aa6ac_55%,#f2f4f6_90%)] bg-clip-text  [filter:drop-shadow(0_0_18px_rgba(55,232,164,0.18))]"
+              id="outName"
+            >
+              {userName == "" ? address : userName}
+            </div>
+  
+            <div className="w-[120px] h-[2px] mx-auto mb-[26px] bg-[linear-gradient(90deg,#37e8a4,#2bc7ec)] opacity-70 rounded-[2px]" />
+  
+            <div className="text-center text-[15px] leading-[1.65] text-[#cfe9df] max-w-[660px] mx-auto mb-2 font-medium">
+              Has successfully completed the comprehensive evaluation and passed the:
+            </div>
+  
+            <span className="block text-center font-['Orbitron'] text-lg tracking-[0.08em] font-bold text-[#f2f4f6] mt-4 mb-3">
+              GHM21 Certification Exam
+            </span>
+  
+            <div className="text-center text-[13px] italic text-[#7fa89a] max-w-[600px] mx-auto mb-[30px] leading-[1.6]">
+              "Proving competence in decentralized mechanics, the 2.5X rule, and the importance of speed credits within the GHM Marketplace."
+            </div>
+  
+            <div className="relative mx-[-46px] px-[46px] h-[34px] flex items-center justify-center before:content-[''] before:absolute before:left-[46px] before:right-[46px] before:top-1/2 before:h-px before:bg-[#1c352d]">
+              <span className="relative  px-[14px] font-['Orbitron'] text-base tracking-[0.1em] text-[linear-gradient(90deg,#37e8a4,#2bc7ec)] bg-clip-text ">
+                ∞
+              </span>
+            </div>
+  
+            <div className="mx-[-46px] px-[46px] pt-6 pb-8 font-mono bg-[linear-gradient(180deg,rgba(43,199,236,0.03),transparent)]">
+              <div className="text-center font-['Orbitron'] text-[11px] tracking-[0.2em] uppercase text-[#2bc7ec] mb-[18px] font-bold">
+                Blockchain Verification Log
+              </div>
+              <table className="w-full border-collapse text-[12.5px]">
+                <tbody>
+                  <tr>
+                    <td className="py-[9px] px-[6px] border-b border-[#1c352d] align-top text-[#7fa89a] w-[250px] max-[640px]:w-[150px] tracking-[0.02em]">
+                      Participant ID / Wallet Address
+                    </td>
+                    <td className="py-[9px] px-[6px] border-b border-[#1c352d] align-top text-[#eafff5] break-all" id="outWallet">
+                      {address}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="py-[9px] px-[6px] border-b border-[#1c352d] align-top text-[#7fa89a] w-[250px] max-[640px]:w-[150px] tracking-[0.02em]">
+                      Exam Status
+                    </td>
+                    <td className="py-[9px] px-[6px] border-b border-[#1c352d] align-top text-[#eafff5] break-all">
+                      <span className="inline-block bg-[rgba(55,232,164,0.10)] text-[#37e8a4] border border-[rgba(55,232,164,0.4)] px-[11px] py-[3px] rounded-[20px] text-[11px] tracking-[0.06em] font-semibold">
+                        VERIFIED — SUCCESSFUL COMPLETION
+                      </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="py-[9px] px-[6px] border-b border-[#1c352d] align-top text-[#7fa89a] w-[250px] max-[640px]:w-[150px] tracking-[0.02em]">
+                      Issue Timestamp (UTC)
+                    </td>
+                    <td className="py-[9px] px-[6px] border-b border-[#1c352d] align-top text-[#eafff5] break-all" id="outTs">
+                      2026-07-20 14:32:09 UTC
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="py-[9px] px-[6px] border-b border-[#1c352d] align-top text-[#7fa89a] w-[250px] max-[640px]:w-[150px] tracking-[0.02em]">
+                      Smart Contract Address
+                    </td>
+                    <td className="py-[9px] px-[6px] border-b border-[#1c352d] align-top text-[#eafff5] break-all" id="outContract">
+                      {contract_address.slice(0, 6) + "...." + contract_address.slice(36, 42)} (GHM21CertificateRegistry)
+                    </td>
+                  </tr>
+                  {/* <tr><td>Verification Transaction Hash</td><td id="outTx">0x4b8d1a...9f02c7</td></tr> */}
+                </tbody>
+              </table>
+            </div>
+  
+            <div className="mt-[22px] pt-[22px] pb-[30px] flex justify-between items-end max-[640px]:flex-col max-[640px]:items-center max-[640px]:gap-4 max-[640px]:text-center">
+              <div className="text-[13px] text-[#cfe9df]">
+                <strong className="block font-['Orbitron'] font-bold text-[10.5px] tracking-[0.16em] text-[#37e8a4] uppercase mb-[6px]">
+                  GHM21 Core Principle
+                </strong>
+                Code is Law. In Math We Trust.
+              </div>
+              <div className="text-right text-[11.5px] text-[#7fa89a] leading-[1.6] max-[640px]:text-center">
+                Issued by:<br />
+                <strong className="block text-[#f2f4f6] text-[12.5px] font-semibold">
+                  GHM21 Autonomous Smart Contract Engine
+                </strong>
+                (A purely algorithmic entity)
+              </div>
+            </div>
+  
+          </div>
+        </div>
+
         )}
       </div>
 
       
-      <div
 
-        id="certificate"
-        className="relative w-[940px] max-w-full rounded-[18px] p-[2px] shadow-[0_40px_90px_rgba(0,0,0,0.55)] bg-[radial-gradient(ellipse_700px_300px_at_50%_0%,rgba(43,199,236,0.10),transparent_60%),linear-gradient(180deg,#0d1a17,#0f201b)] before:content-[''] before:absolute before:inset-0 before:rounded-[18px] before:p-[2px] before:opacity-55 before:bg-[linear-gradient(135deg,#37e8a4,transparent_30%,transparent_70%,#2bc7ec)] before:[mask:linear-gradient(#000_0_0)_content-box,linear-gradient(#000_0_0)] before:[mask-composite:exclude] before:[-webkit-mask-composite:xor]"
-      >
-        <div className="relative rounded-[16px] pt-10 px-[46px] pb-0 bg-[linear-gradient(180deg,rgba(5,15,13,0.4),rgba(5,15,13,0.85))]">
-
-          <div className="flex flex-col items-center gap-[10px] mb-[6px]">
-            <img className="h-14" src={logo} alt="GHM21" />
-          </div>
-
-          <div className="text-center font-mono text-[10.5px] tracking-[0.18em] text-[#7fa89a] uppercase mt-[2px] mb-[22px]">
-            Decentralized Governance · P2P Protocol Framework · Verification System
-          </div>
-
-          <div className="h-px mb-[26px] bg-[linear-gradient(90deg,transparent,#37e8a4,#2bc7ec,transparent)] opacity-55" />
-
-          <div className="text-center font-['Orbitron'] text-[15px] font-bold uppercase tracking-[0.22em] mb-[10px]  bg-clip-text text-white">
-            Certificate of Accomplishment
-          </div>
-
-          <div className="text-center text-sm text-[#7fa89a] mb-5 tracking-[0.02em]">
-            This on-chain credential officially verifies that:
-          </div>
-
-          <div
-            className="text-center font-['Orbitron'] font-bold text-[38px] max-[640px]:text-[28px] tracking-[0.02em] mt-1 mb-[14px] leading-[1.25] break-words text-[linear-gradient(180deg,#f2f4f6_20%,#9aa6ac_55%,#f2f4f6_90%)] bg-clip-text  [filter:drop-shadow(0_0_18px_rgba(55,232,164,0.18))]"
-            id="outName"
-          >
-            {userName == "" ? address : userName}
-          </div>
-
-          <div className="w-[120px] h-[2px] mx-auto mb-[26px] bg-[linear-gradient(90deg,#37e8a4,#2bc7ec)] opacity-70 rounded-[2px]" />
-
-          <div className="text-center text-[15px] leading-[1.65] text-[#cfe9df] max-w-[660px] mx-auto mb-2 font-medium">
-            Has successfully completed the comprehensive evaluation and passed the:
-          </div>
-
-          <span className="block text-center font-['Orbitron'] text-lg tracking-[0.08em] font-bold text-[#f2f4f6] mt-4 mb-3">
-            GHM21 Certification Exam
-          </span>
-
-          <div className="text-center text-[13px] italic text-[#7fa89a] max-w-[600px] mx-auto mb-[30px] leading-[1.6]">
-            "Proving competence in decentralized mechanics, the 2.5X rule, and the importance of speed credits within the GHM Marketplace."
-          </div>
-
-          <div className="relative mx-[-46px] px-[46px] h-[34px] flex items-center justify-center before:content-[''] before:absolute before:left-[46px] before:right-[46px] before:top-1/2 before:h-px before:bg-[#1c352d]">
-            <span className="relative  px-[14px] font-['Orbitron'] text-base tracking-[0.1em] text-[linear-gradient(90deg,#37e8a4,#2bc7ec)] bg-clip-text ">
-              ∞
-            </span>
-          </div>
-
-          <div className="mx-[-46px] px-[46px] pt-6 pb-8 font-mono bg-[linear-gradient(180deg,rgba(43,199,236,0.03),transparent)]">
-            <div className="text-center font-['Orbitron'] text-[11px] tracking-[0.2em] uppercase text-[#2bc7ec] mb-[18px] font-bold">
-              Blockchain Verification Log
-            </div>
-            <table className="w-full border-collapse text-[12.5px]">
-              <tbody>
-                <tr>
-                  <td className="py-[9px] px-[6px] border-b border-[#1c352d] align-top text-[#7fa89a] w-[250px] max-[640px]:w-[150px] tracking-[0.02em]">
-                    Participant ID / Wallet Address
-                  </td>
-                  <td className="py-[9px] px-[6px] border-b border-[#1c352d] align-top text-[#eafff5] break-all" id="outWallet">
-                    {address}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="py-[9px] px-[6px] border-b border-[#1c352d] align-top text-[#7fa89a] w-[250px] max-[640px]:w-[150px] tracking-[0.02em]">
-                    Exam Status
-                  </td>
-                  <td className="py-[9px] px-[6px] border-b border-[#1c352d] align-top text-[#eafff5] break-all">
-                    <span className="inline-block bg-[rgba(55,232,164,0.10)] text-[#37e8a4] border border-[rgba(55,232,164,0.4)] px-[11px] py-[3px] rounded-[20px] text-[11px] tracking-[0.06em] font-semibold">
-                      VERIFIED — SUCCESSFUL COMPLETION
-                    </span>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="py-[9px] px-[6px] border-b border-[#1c352d] align-top text-[#7fa89a] w-[250px] max-[640px]:w-[150px] tracking-[0.02em]">
-                    Issue Timestamp (UTC)
-                  </td>
-                  <td className="py-[9px] px-[6px] border-b border-[#1c352d] align-top text-[#eafff5] break-all" id="outTs">
-                    2026-07-20 14:32:09 UTC
-                  </td>
-                </tr>
-                <tr>
-                  <td className="py-[9px] px-[6px] border-b border-[#1c352d] align-top text-[#7fa89a] w-[250px] max-[640px]:w-[150px] tracking-[0.02em]">
-                    Smart Contract Address
-                  </td>
-                  <td className="py-[9px] px-[6px] border-b border-[#1c352d] align-top text-[#eafff5] break-all" id="outContract">
-                    {contract_address.slice(0, 6) + "...." + contract_address.slice(36, 42)} (GHM21CertificateRegistry)
-                  </td>
-                </tr>
-                {/* <tr><td>Verification Transaction Hash</td><td id="outTx">0x4b8d1a...9f02c7</td></tr> */}
-              </tbody>
-            </table>
-          </div>
-
-          <div className="mt-[22px] pt-[22px] pb-[30px] flex justify-between items-end max-[640px]:flex-col max-[640px]:items-center max-[640px]:gap-4 max-[640px]:text-center">
-            <div className="text-[13px] text-[#cfe9df]">
-              <strong className="block font-['Orbitron'] font-bold text-[10.5px] tracking-[0.16em] text-[#37e8a4] uppercase mb-[6px]">
-                GHM21 Core Principle
-              </strong>
-              Code is Law. In Math We Trust.
-            </div>
-            <div className="text-right text-[11.5px] text-[#7fa89a] leading-[1.6] max-[640px]:text-center">
-              Issued by:<br />
-              <strong className="block text-[#f2f4f6] text-[12.5px] font-semibold">
-                GHM21 Autonomous Smart Contract Engine
-              </strong>
-              (A purely algorithmic entity)
-            </div>
-          </div>
-
-        </div>
-      </div>
 
     </div>
   );

@@ -18,7 +18,7 @@ import { useSwitchChain, useDisconnect } from "wagmi";
 import ProvideHelpModal from './ProvideHelpModal';
 
 import { ToastContainer, toast } from 'react-toastify';
-
+import NotificationTimer from "../components/NotificationTimer";
 import {
   token_abi, 
   USDT_address,  
@@ -41,7 +41,7 @@ const avatarComponents = [shield, medal, crown]
 const cardSurface =
   'box-border flex flex-col gap-2.5 rounded-3xl border-[1.5px] border-white/[0.24] bg-white/[0.04]'
 
-  function RecommitTimer({ initial }) {
+  function RecommitTimer({ initial,text }) {
     const getRemainingSeconds = () => {
       const now = Math.floor(Date.now() / 1000);
       return Math.max(Number(initial) - now, 0);
@@ -68,7 +68,7 @@ const cardSurface =
     return (
       <div className="flex h-[84px] w-[84px] flex-col items-center justify-center gap-0.5 rounded-full border-[2.5px] border-teal">
         <span className="font-sans text-[10px] font-semibold tracking-[0.3px] text-teal">
-          Recommit
+          {text}
         </span>
   
         <span className="font-sans text-[13px] font-bold tracking-[0.5px] text-teal">
@@ -119,7 +119,7 @@ export default function ProfilePage({
   userName,
   handlePH,
   handle_orders_feed,
-  curr_time,
+  currTime,
   CurrHalvingData
 
 }) {
@@ -180,6 +180,19 @@ function ethToWei(amount) {
   return web3.utils.toWei(amount.toString(), "ether");
 }
   // let order_no=[];
+  function blockchainTimeToDate(blockchainTime) {
+    const date = new Date(Number(blockchainTime) * 1000);
+  
+    return date.toLocaleString("en-US", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+      // hour: "2-digit",
+      // minute: "2-digit",
+      // second: "2-digit",
+    });
+  }
+
 
   const handleTeamScroll = (e) => {
     e.currentTarget.scrollLeft += e.deltaY;
@@ -288,7 +301,7 @@ async function exit(no) {
         return
       }
 
-      const confirmed=confirm("🚨 Confirm Emergency Exit! This action resets your account and cannot be undone. Proceed??")
+      const confirmed=confirm("🚨 Confirm Emergency Exit! This action resets your account and cannot be undone. Proceed?")
      
       if (!confirmed) 
       {
@@ -339,7 +352,7 @@ async function exit(no) {
           return
         }
 
-        const confirmed = confirm("Boosting this order incurs a $2 fee. Would you like to proceed?");
+        const confirmed = confirm("🚀 Confirm Boost: This action requires a $2 fee. Proceed?");
 
         if (!confirmed) {
             return;
@@ -439,12 +452,12 @@ async function exit(no) {
               </button>
             </div>
 {
-  user.upliner!="0x0000000000000000000000000000000000000000"?
+ user && user.upliner!="0x0000000000000000000000000000000000000000"?
   <>
   <span className="font-sans text-[13px] font-normal text-gray-500 md:text-sm">Upliner Address</span>
   <div className="flex items-center justify-between gap-3 rounded-[10px] border-[1.5px] border-white/[0.24] bg-white/[0.04] px-4 py-3">
   <span className="font-sans text-[13px] font-normal text-gray-300 md:text-sm">
-{ user.upliner? user.upliner:0}</span>              
+{ user.upliner? user.upliner.slice(0, 6)+"....."+user.upliner.slice(36,42):0} </span>              
 
 <button onClick={() => copyToClipboard( `${user.upliner}`)} className="flex shrink-0 cursor-pointer items-center border-none bg-transparent text-teal transition-opacity hover:opacity-70">
       <CopyIcon onClick={() => copyToClipboard( `${user.upliner}`)} />
@@ -516,6 +529,7 @@ async function exit(no) {
 
             <div className="flex items-center mb-2 mt-1 justify-center">
                 <button
+                onClick={()=>setShowCertificate(true)}
                   type="button"
                   className="flex w-full items-center justify-center gap-3 rounded-2xl border-[1.5px] border-white/90 bg-transparent px-4 py-4 font-sans text-center text-[15px] font-medium leading-tight text-white transition-colors hover:bg-white/[0.06] md:py-5 md:text-[18px]"
                 >
@@ -555,6 +569,12 @@ async function exit(no) {
           </div>
         </div>
       </div>
+      {myLastOrder && Number(myLastOrder.remaining_amount)==0 && Number(currTime) < (Number  (myLastOrder.close_time) + 1800)? 
+            <NotificationTimer
+            initialSeconds={ (Number(myLastOrder.close_time) + 1800)- Number(currTime) }
+            message="Recommit within this Time Period will make you a speedstar"
+          />:""
+    }
 
       <h2 className="mt-1 font-sans text-[26px] font-bold text-white md:mt-3">Your Recent Helps</h2>
 
@@ -642,7 +662,7 @@ async function exit(no) {
           </button>
 
           ):(
-            <button disabled={!item.is_unlocked || item.remaining_amount==0} className={btnBoost} onClick={e => {set_no(item.no);e.stopPropagation();HandleBoost()}}>
+            <button disabled={!item.is_unlocked || item.remaining_amount==0 || currTime < item.halving_delay} className={btnBoost} onClick={e => {set_no(item.no);e.stopPropagation();HandleBoost()}}>
             <img src={boost} alt="boost" className="w-4 h-4" />
             <span>Boost</span>
           </button>
@@ -678,7 +698,7 @@ async function exit(no) {
             </div>
 
             <div className="flex shrink-0 items-center justify-center max-md:self-end">
-              {item.status === 'timer' && <RecommitTimer initial={6037} />}
+              {Number(item.halving_delay)> Number(currTime )&& <RecommitTimer initial={Number(item.halving_delay)} text="Halving Delay" />}
               {item.status === 'done' && (
                 <div className="flex h-[50px] w-[50px] items-center justify-center rounded-full bg-teal">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round">
@@ -711,7 +731,7 @@ async function exit(no) {
             onClick={() => toggleExpand(i)}
           >
 <div>
-<div className="grid grid-cols-3 gap-1 max-sm:gap-0.5">
+<div className="grid grid-cols-4 gap-2 max-sm:gap-0.5">
 
   <div className="flex flex-col gap-1">
     <span className="font-sans text-[11px] font-medium uppercase tracking-wide text-gray-500">
@@ -731,15 +751,22 @@ async function exit(no) {
     </span>
   </div>
 
-  {/* <div className="flex flex-col gap-1">
+  <div className="flex flex-col gap-1">
     <span className="font-sans text-[11px] font-medium uppercase tracking-wide text-gray-500">
-      Date
+      Start Date
     </span>
     <span className="font-sans text-[16px] font-bold leading-none text-green">
-      ${Number(item.create_time) / 10**18}
+      {blockchainTimeToDate(Number(item.create_time) )}
     </span>
-  </div>  */}
-
+  </div> 
+  <div className="flex flex-col gap-1">
+    <span className="font-sans text-[11px] font-medium uppercase tracking-wide text-gray-500">
+      End Date
+    </span>
+    <span className="font-sans text-[16px] font-bold leading-none text-green">
+      {blockchainTimeToDate(Number(item.close_time))}
+    </span>
+  </div> 
 </div>
 <p className={`font-sans text-[13px] font-normal leading-relaxed text-gray-500 ${ expandedItems[i] ? '' : 'hidden' }`} > {item.Dream} </p>
 
@@ -849,6 +876,7 @@ async function exit(no) {
         userName={userName}
         onClose={() => setShowCertificate(false)}
         user={user}
+        handlePH={handlePH}
         />
       )}
 

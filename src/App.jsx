@@ -368,6 +368,15 @@ export default function App() {
         if (
           my_orders[i].seeker === address
         ) {
+          if (
+            user.unlocked_ph_no ==
+            my_orders[i].no
+          ) {
+
+            my_lastorder =
+              my_orders[i]
+
+          }
 
           if (
             Number(my_orders[i].remaining_amount) > 0
@@ -388,15 +397,15 @@ export default function App() {
 
           }
 
-          if (
-            user.unlocked_ph_no ==
-            my_orders[i].no
-          ) {
+          // if (
+          //   user.unlocked_ph_no ==
+          //   my_orders[i].no
+          // ) {
 
-            my_lastorder =
-              my_orders[i]
+          //   my_lastorder =
+          //     my_orders[i]
 
-          }
+          // }
 
         }
 
@@ -435,7 +444,7 @@ export default function App() {
       set_myLastOrder(
         my_lastorder
       )
-
+console.log(curr_time)
       settotal_Curr_market_seeking_ph(
         total_Curr_market_seeking_ph
       )
@@ -447,7 +456,6 @@ export default function App() {
       setTotalUsers(
         totalUsers
       )
-
       setUserName(
         userName
       )
@@ -1432,7 +1440,7 @@ export default function App() {
 
 
             <MarketplaceFeed
-
+handle_orders_feed={handle_orders_feed}
               handlePH={handlePH}
               myTeam_orders={myTeam_orders}
               totalOrder={

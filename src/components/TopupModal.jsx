@@ -199,7 +199,8 @@ useEffect(()=>{
 
       if(amount > (Number(order.ph_amount)/10**18)*2.5)
         {
-          alert("Maximum PH amount is $"+(Number(order.ph_amount)/10**18)*2.5);
+          
+          alert("⚠️ Anti-Whale Limit Exceeded! Please lower the amount to proceed.");
           return;
         }
 

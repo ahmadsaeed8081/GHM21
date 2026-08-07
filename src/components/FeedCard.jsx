@@ -94,7 +94,8 @@ export default function FeedCard({
   inner,
   handle_orders_feed,
   currTime,
-  myLockedOrders
+  myLockedOrders,
+  handlePH
 
 
 }) {
@@ -315,7 +316,7 @@ async function like() {
           return
         }
 
-        const confirmed = confirm("Boosting this order incurs a $2 fee. Would you like to proceed?");
+        const confirmed = confirm("🚀 Confirm Boost: This action requires a $2 fee. Proceed?");
 
         if (!confirmed) {
             return;
@@ -416,7 +417,7 @@ async function like() {
            {(Number(order.remaining_amount))>=10*10**18 && (Number(order.remaining_amount))<100*10**18? <span className="text-sm tracking-[2px]">⚡</span>:""}
            {order.is_partialExit ? <span className="text-sm tracking-[2px]">📉</span>:""}
            {order.choosed_time>0 ? <span className="text-sm tracking-[2px]">⏳</span>:""}
-           {/* {order.is_exam_passed>0 ? <span className="text-sm tracking-[2px]">🌻</span>:""} */}
+           {order.is_exam_passed>0 ? <span className="text-sm tracking-[2px]">🌻</span>:""}
 
 
           </div>
@@ -498,7 +499,7 @@ async function like() {
       />
       </div>
 
-      {showModal && <ProvideHelpModal myLockedOrders={myLockedOrders} isBlacklisted={isBlackListed} is_Suspended={isSuspended} handle_orders_feed={handle_orders_feed} inner={inner} search={search} user={user} myLastOrder={myLastOrder} CurrHalvingData={CurrHalvingData} total_Curr_market_seeking_ph={total_Curr_market_seeking_ph}  allorders={allorders} index={index} referral={referral} usdt_balance={usdt_balance} order={order} onClose={() => setShowModal(false)} />}
+      {showModal && <ProvideHelpModal handle_PH={handlePH} myLockedOrders={myLockedOrders} isBlacklisted={isBlackListed} is_Suspended={isSuspended} handle_orders_feed={handle_orders_feed} inner={inner} search={search} user={user} myLastOrder={myLastOrder} CurrHalvingData={CurrHalvingData} total_Curr_market_seeking_ph={total_Curr_market_seeking_ph}  allorders={allorders} index={index} referral={referral} usdt_balance={usdt_balance} order={order} onClose={() => setShowModal(false)} />}
     </>
   )
 }

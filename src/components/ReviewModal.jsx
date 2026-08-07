@@ -173,6 +173,11 @@ async function submission_of_letter()
       alert("kindly write a letter that contain atleast 25 characters ")
       return
     }
+    if(!media)
+      {
+        alert("kindly attached a image or a video")
+        return;
+      }
     if (media.type.startsWith("image/")) {
       if (media.size > MAX_IMAGE_SIZE)
       {
@@ -187,13 +192,7 @@ async function submission_of_letter()
         return;
       }
     }
-      if (media.type.startsWith("image/")) {
-        if (media.size > MAX_IMAGE_SIZE)
-        {
-          alert("Image size must be less than 2 MB.");
-          return;
-        }
-      }
+
     if(isDisconnected)
       {
         alert("Kindly Connect your wallet");
@@ -210,11 +209,7 @@ async function submission_of_letter()
         alert("You are Blacklisted, You cant perform this action");
         return;
       }
-      if(!media)
-      {
-        alert("kindly attached a image or a video")
-        return;
-      }
+
       if(chainId != currentChainId )
         {
           await switchChainAsync({ chainId });
@@ -328,7 +323,7 @@ async function submission_of_letter()
 
   async function handleBypass() 
   {
-    const confirmed = confirm("Bypassing this step incurs a $2 fee. Would you like to proceed?");
+    const confirmed = confirm("⚠️ Bypass Letter of Happiness? This action costs $2 fee. Proceed?");
 
     if (!confirmed) {
         return;

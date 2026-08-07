@@ -62,10 +62,10 @@ export default function MarketplaceFeed({
   totalSuspension,
   usdt_balance,
   currTime,
-
+  handle_orders_feed,
   allorders,
   myLockedOrders,
-
+  handlePH,
   referral,
   myLastOrder,
   total_Curr_market_seeking_ph,
@@ -925,6 +925,8 @@ export default function MarketplaceFeed({
           >
 
             <FeedCard
+            handle_orders_feed={handle_orders_feed}
+            handlePH={handlePH}
             currTime={currTime}
             myLockedOrders={myLockedOrders}
               CurrHalvingData={
@@ -1017,9 +1019,10 @@ export default function MarketplaceFeed({
                 (order, index) => (
 
                   <FeedCard
+                  handle_orders_feed={handle_orders_feed}
                   currTime={currTime}
                   myLockedOrders={myLockedOrders}
-
+                  handlePH={handlePH}
                     key={
                       order.no ??
                       order.orderNo ??
