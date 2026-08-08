@@ -495,13 +495,13 @@ useEffect(()=>{
 
           <div className="mt-2 flex flex-col items-end text-[11px] leading-5">
     <span className="text-gray-500">
-      2% Fee: <span className="text-white">${fee}</span>
+      2% Fee: <span className="text-white">${Number(fee).toFixed(2)}</span>
     </span>
 
     <span className="text-gray-500">
       Total amount:
       <span className="ml-1 font-semibold text-teal">
-        ${Number(amount)+Number(fee)}
+        ${(Number(amount)+Number(fee)).toFixed(2)}
       </span>
     </span>
   </div>
