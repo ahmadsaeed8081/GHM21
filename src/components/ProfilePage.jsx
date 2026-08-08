@@ -494,7 +494,7 @@ async function exit(no) {
             {user!=null ? (Number(user.rank_no)>0 && Number(user.rank_no)<4 ?          
         
         <div className="flex flex-1 justify-center  shrink-0 items-center justify-center ">
-          <img src={avatarComp[Number(user.rank_no)]} alt="avatar" className=" w-22 h-22" />
+          <img src={avatarComp[Number(user.rank_no)-1]} alt="avatar" className=" w-22 h-22" />
         </div> 
         
         :            
