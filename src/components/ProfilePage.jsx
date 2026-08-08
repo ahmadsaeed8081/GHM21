@@ -480,15 +480,15 @@ async function exit(no) {
           
         </div>
 
-        <div className="flex flex-col gap-3 md:gap-4">
+        <div className="flex  flex-col gap-3 md:gap-4">
           <div className={`${cardSurface} box-border justify-between px-5 py-5 md:min-h-[266px] md:py-10 md:pr-[43px] md:pl-8`}>
             <span className="font-sans text-[13px] font-normal text-gray-500 md:text-sm">Current Badge</span>
             
             
-            {user!=null ? (Number(user.rank_no)>0 && Number(user.rank_no)<4 ?          
+            {user!=null ? (Number(user.rank_no)==0 && Number(user.rank_no)<4 ?          
         
-        <div className="flex h-10 w-22 shrink-0 items-center justify-center ">
-          <img src={avatarComp[Number(user.rank_no)]} alt="avatar" className=" w-30 h-25" />
+        <div className="flex flex-1 justify-center  shrink-0 items-center justify-center ">
+          <img src={avatarComp[Number(user.rank_no)]} alt="avatar" className=" w-22 h-22" />
         </div> 
         
         :            
