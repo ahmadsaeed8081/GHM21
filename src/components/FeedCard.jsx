@@ -416,8 +416,8 @@ async function like() {
            {Number(order.remaining_amount) < Number(order.ph_amount) + Number(order.reward_amount)? <span className="text-sm tracking-[2px]">🌓</span>:""}
            {(Number(order.remaining_amount))>=10*10**18 && (Number(order.remaining_amount))<100*10**18? <span className="text-sm tracking-[2px]">⚡</span>:""}
            {order.is_partialExit ? <span className="text-sm tracking-[2px]">📉</span>:""}
-           {order.choosed_time>0 ? <span className="text-sm tracking-[2px]">⏳</span>:""}
-           {order.is_exam_passed>0 ? <span className="text-sm tracking-[2px]">🌻</span>:""}
+           {Number(order.choosed_time)>0 ? <span className="text-sm tracking-[2px]">⏳</span>:""}
+           {Number(order.rank_no) == 0 && order.is_exam_passed ? <span className="text-sm tracking-[2px]">🌻</span>:""}
 
 
           </div>

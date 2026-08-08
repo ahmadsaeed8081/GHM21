@@ -381,6 +381,12 @@ async function exit(no) {
             message="Recommit within this Time Period will make you a speedstar"
           />:""
     }
+        {user && Number(user.choosed_time)>0 && Number(currTime) > (Number(user.choosed_time) + 7200) && isSuspended? 
+            <NotificationTimer
+            initialSeconds={ (Number(user.choosed_time) + 93600)- Number(currTime) }
+            message="You are Suspended, will be active after this time period"
+          />:""
+    }
       <div className="grid grid-cols-4 gap-4 max-md:grid-cols-1 md:gap-4">
         {[
           { label: 'Total PH', value: "$"+(user!=null ? (Number(user.Total_Ph)/10**18).toFixed(2):0 )},
@@ -709,7 +715,9 @@ async function exit(no) {
 
             <div className="flex shrink-0 items-center justify-center max-md:self-end">
               {Number(item.halving_delay)> Number(currTime )&& <RecommitTimer initial={Number(item.halving_delay)} text="Halving Delay" />}
-              {item.status === 'done' && (
+              {(Number(user.choosed_time) + 7200) >  Number(currTime )&& <RecommitTimer initial={(Number(user.choosed_time) + 7200)- Number(currTime)} text="Choosed" />}
+
+              {/* {item.status === 'done' && (
                 <div className="flex h-[50px] w-[50px] items-center justify-center rounded-full bg-teal">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round">
                     <polyline points="20 6 9 17 4 12" />
@@ -722,7 +730,7 @@ async function exit(no) {
                     <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
                   </svg>
                 </div>
-              )}
+              )} */}
             </div>
           </div>
         ))}
@@ -861,7 +869,7 @@ async function exit(no) {
       </div>
 
       <div className="flex shrink-0 items-center justify-center max-md:self-end">
-        {item.choosed_time > 0 && <RecommitTimer initial={(Number(item.choosed_time)+7200)} />}
+        {item.choosed_time > 0 && <RecommitTimer initial={(Number(item.choosed_time)+7200)}  text="Recommit Time" />}
         {item.status === 'done' && (
           <div className="flex h-[50px] w-[50px] items-center justify-center rounded-full bg-teal">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round">
