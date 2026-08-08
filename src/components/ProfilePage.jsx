@@ -375,7 +375,7 @@ async function exit(no) {
 
 
     <div className="mx-auto flex w-full max-w-[1100px] flex-col gap-4 px-4 py-4 pb-12 md:gap-4 md:px-6 md:py-5">
-    {myLastOrder && Number(myLastOrder.remaining_amount)==0 && Number(currTime) > (Number  (myLastOrder.close_time) + 1800)? 
+    {myLastOrder && Number(myLastOrder.remaining_amount)==0 && Number(currTime) < (Number  (myLastOrder.close_time) + 1800)? 
             <NotificationTimer
             initialSeconds={ (Number(myLastOrder.close_time) + 1800)- Number(currTime) }
             message="Recommit within this Time Period will make you a speedstar"
@@ -869,7 +869,7 @@ async function exit(no) {
       </div>
 
       <div className="flex shrink-0 items-center justify-center max-md:self-end">
-        {item.choosed_time > 0 && <RecommitTimer initial={(Number(item.choosed_time)+7200)}  text="Recommit Time" />}
+        {item.choosed_time > 0 && <RecommitTimer initial={(Number(item.choosed_time)+7200)}  text="2 Hour Dash Timer" />}
         {item.status === 'done' && (
           <div className="flex h-[50px] w-[50px] items-center justify-center rounded-full bg-teal">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round">
