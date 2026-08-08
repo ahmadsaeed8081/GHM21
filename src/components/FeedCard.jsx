@@ -7,7 +7,7 @@ import dream from '../assets/icons/dream.png';
 import help from '../assets/icons/help.png';
 import boost from '../assets/icons/boost.png';
 import dropdown from '../assets/icons/dropdown.png';
-
+import guider from "../assets/icons/guider.png"
 import { polygon, polygonAmoy } from "wagmi/chains";
 import Web3, { providers } from "web3";
 
@@ -66,7 +66,7 @@ import {
 
 } from "../../src/components/configs/Contracts";
 
-const avatarComponents = [shield, medal, crown]
+const avatarComponents = [guider, medal, crown]
 
 const description = `I'm asking for orphanage so that we can purchase beds for the children. It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text.`
 
@@ -347,7 +347,7 @@ async function like() {
         {Number(order.rank_no)>0 && Number(order.rank_no)!=4 ?          
         
         <div className="flex h-10 w-10 shrink-0 items-center justify-center max-nav:hidden">
-          <img src={avatarComp[Number(order.rank_no)]} alt="avatar" className="w-8 h-8" />
+          <img src={avatarComp[Number(order.rank_no)-1]} alt="avatar" className="w-10 h-10" />
         </div> 
         
         :"" }
@@ -380,7 +380,7 @@ async function like() {
           <div className="flex flex-wrap items-center gap-1">
             {/* Avatar - mobile only, inline with User-ID */}
             {Number(order.rank_no)>0  && Number(order.rank_no)!=4 ? (
-            <img src={avatarComp[Number(order.rank_no)]} alt="avatar" className="w-6 h-6 nav:hidden" />
+            <img src={avatarComp[Number(order.rank_no)-1]} alt="avatar" className="w-8 h-8 nav:hidden" />
 
             ):("")   }
 

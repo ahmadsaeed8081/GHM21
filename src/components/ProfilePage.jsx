@@ -7,7 +7,7 @@ import TopupModal from "../components/TopupModal"
 import shield from '../assets/icons/shield.png';
 import medal from '../assets/icons/medal.png';
 import crown from '../assets/icons/crown.png';
-
+import guider from "../assets/icons/guider.png"
 import Certificate from './Certificate';
 import { polygon, polygonAmoy } from "wagmi/chains";
 import Web3 from "web3";
@@ -35,7 +35,7 @@ const CopyIcon = () => (
   </svg>
 )
 
-const avatarComponents = [shield, medal, crown]
+const avatarComponents = [guider, medal, crown]
 
 
 const cardSurface =
