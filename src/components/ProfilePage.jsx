@@ -485,7 +485,7 @@ async function exit(no) {
             <span className="font-sans text-[13px] font-normal text-gray-500 md:text-sm">Current Badge</span>
             
             
-            {user!=null ? (Number(user.rank_no)==0 && Number(user.rank_no)<4 ?          
+            {user!=null ? (Number(user.rank_no)>0 && Number(user.rank_no)<4 ?          
         
         <div className="flex flex-1 justify-center  shrink-0 items-center justify-center ">
           <img src={avatarComp[Number(user.rank_no)]} alt="avatar" className=" w-22 h-22" />
