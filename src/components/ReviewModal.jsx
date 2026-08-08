@@ -398,7 +398,7 @@ async function submission_of_letter()
 
     <textarea
       className="box-border min-h-[200px] w-full resize-none rounded-[14px] border border-white/10 bg-white/[0.04] px-6 pt-5 pb-14 font-sans text-[15px] font-normal leading-relaxed text-white outline-none transition-[border-color] placeholder:text-gray-600 focus:border-white/[0.22]"
-      placeholder="Write your happiness here.."
+      placeholder="Hello! I am [Name] from [Country]. On [Date], I received financial assistance of [Amount] USDT in my wallet. Thank you GHM21 community, together we achieve so much more!"
       maxLength={1000}
       value={review}
       onChange={e => setReview(e.target.value)}
