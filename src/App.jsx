@@ -323,7 +323,7 @@ export default function App() {
 
       const my_orders =
         await contract.methods
-          .get_userOrders("0x0A17A31BFa32A18363e9498E84c8800f8Acfce47")
+          .get_userOrders(address)
           .call()
           const myTeam_orders =
           await contract.methods
@@ -366,7 +366,7 @@ export default function App() {
       ) {
 
         if (
-          my_orders[i].seeker === "0x0A17A31BFa32A18363e9498E84c8800f8Acfce47"
+          my_orders[i].seeker === address
         ) {
           if (
             user.unlocked_ph_no ==
