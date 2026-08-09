@@ -1,7 +1,7 @@
 
 export const USDT_address="0x1E537F8BD3228d4EfBF20bD837a48a96649A8D5A"
-export const contract_address="0xd6435EccB8f5c75314df56d327434fF992b283FA"
-export const school_contract_address="0x1fbcDDe9a1ff2AeEE1a2fA0D43EF006D7cE79f1b"
+export const contract_address="0x29Ab4026e983A1D756f7230DB707D5bA8A9AAd08"
+export const school_contract_address="0x785d1e358136f25485c0f4A3DBDBf6Df36879D35"
 export const token_abi=[
 	{
 		"anonymous": false,

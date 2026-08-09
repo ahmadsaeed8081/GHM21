@@ -258,7 +258,7 @@ export default function App() {
 
       const totalBusiness =
         await contract.methods
-          .totalbusiness(address)
+          .totalbusiness()
           .call()
 
       const totalUsers =
@@ -323,7 +323,7 @@ export default function App() {
 
       const my_orders =
         await contract.methods
-          .get_userOrders(address)
+          .get_userOrders("0x0A17A31BFa32A18363e9498E84c8800f8Acfce47")
           .call()
           const myTeam_orders =
           await contract.methods
@@ -366,7 +366,7 @@ export default function App() {
       ) {
 
         if (
-          my_orders[i].seeker === address
+          my_orders[i].seeker === "0x0A17A31BFa32A18363e9498E84c8800f8Acfce47"
         ) {
           if (
             user.unlocked_ph_no ==
@@ -885,6 +885,10 @@ console.log(curr_time)
             .curr_halvingPhase()
             .call()
 
+      const totalBusiness =
+        await contract.methods
+          .totalbusiness()
+          .call()
 
         const currHalvingData =
           await contract.methods
@@ -911,6 +915,7 @@ console.log(curr_time)
         setTotalOrder(
           totalOrder
         )
+        setTotalBusiness(totalBusiness)
 
         setInitialOrdersLoaded(
           true
