@@ -43,7 +43,7 @@ const halving =[
           /
         </span>
         <span className="text-[clamp(24px,3.5vw,42px)] font-bold leading-none text-white max-sm:text-[22px]">
-          21,000,000 <span className="  text-sm text-gray-400 max-sm:text-[15px]" > USDT</span>
+          2100 <span className="  text-sm text-gray-400 max-sm:text-[15px]" > USDT</span>
         </span>
       </div>
 
@@ -59,7 +59,7 @@ const halving =[
           <span className="relative z-[1] ml-4   w-full text-center text-[13px] font-medium text-gray-300">
           Halving progress:{" "}
 {parseFloat(
-  ((((Number(totalBusiness) / 10 ** 18) / 2100) * 100).toFixed(1))
+  ((((Number(totalBusiness) / 10 ** 18) / 2100) * 100).toFixed())
 )}
 %          </span>
         </div>

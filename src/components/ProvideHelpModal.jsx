@@ -518,7 +518,7 @@ useEffect(()=>{
           <div className="relative">
             <textarea
               className="box-border min-h-[200px] w-full resize-none rounded-[14px] border border-white/10 bg-white/[0.04] px-6 pt-5 pb-11 font-sans text-[15px] font-normal leading-relaxed text-white outline-none transition-[border-color] placeholder:text-gray-600 focus:border-white/[0.22]"
-              placeholder="Write reason..."
+              placeholder="State your need (e.g. Household bills, child education, business support...)"
               maxLength={80}
               value={reason}
               onChange={e => setReason(e.target.value)}

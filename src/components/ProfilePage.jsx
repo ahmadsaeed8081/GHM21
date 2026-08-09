@@ -869,7 +869,7 @@ async function exit(no) {
       </div>
 
       <div className="flex shrink-0 items-center justify-center max-md:self-end">
-        {item.choosed_time > 0 && <RecommitTimer initial={(Number(item.choosed_time)+7200)}  text="2 Hour Dash Timer" />}
+        {item.choosed_time > 0 && <RecommitTimer initial={(Number(item.choosed_time)+7200)}  text="2H Timer" />}
         {item.status === 'done' && (
           <div className="flex h-[50px] w-[50px] items-center justify-center rounded-full bg-teal">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round">
