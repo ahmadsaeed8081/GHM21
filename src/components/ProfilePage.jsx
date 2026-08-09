@@ -714,8 +714,8 @@ async function exit(no) {
             </div>
 
             <div className="flex shrink-0 items-center justify-center max-md:self-end">
-              {Number(item.halving_delay)> Number(currTime )&& <RecommitTimer initial={Number(item.halving_delay)} text="Halving Delay" />}
-              {(Number(user.choosed_time) + 7200) >  Number(currTime )&& <RecommitTimer initial={(Number(user.choosed_time) + 7200)- Number(currTime)} text="Choosed" />}
+              {Number(item.halving_delay)> Number(currTime ) && <RecommitTimer initial={Number(item.halving_delay)} text="Halving Delay" />}
+              {(Number(user.choosed_time) + 7200) >  Number(currTime ) && <RecommitTimer initial={(Number(user.choosed_time) + 7200)} text="Choosed" />}
 
               {/* {item.status === 'done' && (
                 <div className="flex h-[50px] w-[50px] items-center justify-center rounded-full bg-teal">
@@ -869,7 +869,7 @@ async function exit(no) {
       </div>
 
       <div className="flex shrink-0 items-center justify-center max-md:self-end">
-        {item.choosed_time > 0 && <RecommitTimer initial={(Number(item.choosed_time)+7200)}  text="2H Timer" />}
+        {Number(item.choosed_time) > 0 && <RecommitTimer initial={(Number(item.choosed_time)+7200)}  text="2H Timer" />}
         {item.status === 'done' && (
           <div className="flex h-[50px] w-[50px] items-center justify-center rounded-full bg-teal">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round">
