@@ -445,7 +445,7 @@ async function exit(no) {
           Level {index + 1}
         </span>
 
-        {!val.unlocked && (
+        {!val.is_unlocked && (
           <span className="font-sans text-[12px] text-gray-500 md:text-[13px]">
             🔒
           </span>
