@@ -715,7 +715,7 @@ async function exit(no) {
 
             <div className="flex shrink-0 items-center justify-center max-md:self-end">
               {Number(item.halving_delay)> Number(currTime ) && <RecommitTimer initial={Number(item.halving_delay)} text="Halving Delay" />}
-              {(Number(user.choosed_time) + 7200) >  Number(currTime ) && <RecommitTimer initial={(Number(user.choosed_time) + 7200)} text="Choosed" />}
+              {(Number(item.choosed_time) + 7200) >  Number(currTime ) && <RecommitTimer initial={(Number(item.choosed_time) + 7200)} text="Reserve Timer" />}
 
               {/* {item.status === 'done' && (
                 <div className="flex h-[50px] w-[50px] items-center justify-center rounded-full bg-teal">

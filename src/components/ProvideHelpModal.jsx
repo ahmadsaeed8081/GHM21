@@ -546,7 +546,7 @@ useEffect(()=>{
                 className="flex-1 cursor-pointer rounded-[14px] border-[1.5px] border-white/20 bg-transparent px-6 py-[18px] font-sans text-base font-bold text-white transition-colors hover:bg-white/[0.06] max-sm:w-full"
                 onClick={handleChooseOnly}
                 >
-                  Only Choose
+                 Reserve
                 </button>
               )
             
