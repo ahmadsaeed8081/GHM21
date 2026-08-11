@@ -22,7 +22,7 @@ const halving =[
       Number(currHalvingPhase) === 7 ? '$14.7M – $16.8M' :
       Number(currHalvingPhase) === 8 ? '$16.8M – $18.9M' :
       Number(currHalvingPhase) === 9 ? '$18.9M – $21.0M' :
-      '$21.0M+'
+      '$21.0M'
   },
 
 
