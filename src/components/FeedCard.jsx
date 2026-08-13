@@ -8,8 +8,9 @@ import help from '../assets/icons/help.png';
 import boost from '../assets/icons/boost.png';
 import dropdown from '../assets/icons/dropdown.png';
 import guider from "../assets/icons/guider.png"
-import { polygon, polygonAmoy } from "wagmi/chains";
-import Web3, { providers } from "web3";
+// import { polygon, polygonAmoy } from "wagmi/chains";
+
+import { bsc, bscTestnet } from "wagmi/chains";import Web3, { providers } from "web3";
 
 import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
@@ -105,7 +106,7 @@ export default function FeedCard({
 
 const { switchChainAsync } = useSwitchChain();
   const { chainId: currentChainId } = useAccount();
-  const chainId = import.meta.env.VITE_WC_ENV == "production" ? polygon.id : polygonAmoy.id;
+  const chainId = import.meta.env.VITE_WC_ENV == "production" ? bsc.id : bscTestnet.id;
   const [count, set_count] = useState(0);
 
   const { writeContractAsync,writeContract,data:hash, ...states } = useWriteContract();
@@ -262,8 +263,12 @@ async function like() {
           return
         }
 
-      const web3= new Web3(new Web3.providers.HttpProvider("https://poly.api.pocket.network"));
-
+      const web3 =
+        new Web3(
+          new Web3.providers.HttpProvider(
+            "https://bsc-rpc.publicnode.com"
+          )
+        )
       const contract = new web3.eth.Contract(contract_abi, contract_address);
       const isliked = await contract.methods.is_liked(order.seeker,address).call();
 

@@ -230,14 +230,18 @@ export default function App() {
     }
 
     try {
-
+      // const web3 =
+      //   new Web3(
+      //     new Web3.providers.HttpProvider(
+      //       "https://poly.api.pocket.network"
+      //     )
+      //   )
       const web3 =
         new Web3(
           new Web3.providers.HttpProvider(
-            "https://poly.api.pocket.network"
+            "https://bsc-rpc.publicnode.com"
           )
         )
-
       const contract_usdt =
         new web3.eth.Contract(
           token_abi,
@@ -249,7 +253,6 @@ export default function App() {
           contract_abi,
           contract_address
         )
-
 
       const usdt_balance =
         await contract_usdt.methods
@@ -544,13 +547,18 @@ console.log(curr_time)
       setLoadingOrders(true)
 
 
-      const web3 =
+      // const web3 =
+      //   new Web3(
+      //     new Web3.providers.HttpProvider(
+      //       "https://poly.api.pocket.network"
+      //     )
+      //   )
+        const web3 =
         new Web3(
           new Web3.providers.HttpProvider(
-            "https://poly.api.pocket.network"
+            "https://bsc-rpc.publicnode.com"
           )
         )
-
 
       const contract =
         new web3.eth.Contract(
@@ -967,13 +975,18 @@ console.log(curr_time)
         setRefreshingOrders(true)
 
 
-        const web3 =
+        // const web3 =
+        //   new Web3(
+        //     new Web3.providers.HttpProvider(
+        //       "https://poly.api.pocket.network"
+        //     )
+        //   )
+          const web3 =
           new Web3(
             new Web3.providers.HttpProvider(
-              "https://poly.api.pocket.network"
+              "https://bsc-rpc.publicnode.com"
             )
           )
-
 
         const contract =
           new web3.eth.Contract(

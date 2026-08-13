@@ -4,7 +4,7 @@ import { useState,useEffect } from 'react'
 
 
 
-import { polygon, polygonAmoy } from "wagmi/chains";
+import { bsc, bscTestnet } from "wagmi/chains";
 import Web3 from "web3";
 
 import { useWeb3Modal,useWeb3ModalTheme } from '@web3modal/wagmi/react'
@@ -191,7 +191,7 @@ export default function SchoolPage({user}) {
 
   const { isConnected,isDisconnected,chain } = useAccount()
   const { address } = useAccount();
-  const chainId = import.meta.env.VITE_WC_ENV == "production" ? polygon.id : polygonAmoy.id;
+  const chainId = import.meta.env.VITE_WC_ENV == "production" ? bsc.id : bscTestnet.id;
   const { chainId: currentChainId } = useAccount();
 
 

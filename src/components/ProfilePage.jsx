@@ -9,8 +9,9 @@ import medal from '../assets/icons/medal.png';
 import crown from '../assets/icons/crown.png';
 import guider from "../assets/icons/guider.png"
 import Certificate from './Certificate';
-import { polygon, polygonAmoy } from "wagmi/chains";
-import Web3 from "web3";
+// import { polygon, polygonAmoy } from "wagmi/chains";
+
+import { bsc, bscTestnet } from "wagmi/chains";import Web3 from "web3";
 
 import { useWeb3Modal,useWeb3ModalTheme } from '@web3modal/wagmi/react'
 import { useAccount, useReadContract, useWriteContract,useWaitForTransactionReceipt } from "wagmi";
@@ -132,7 +133,7 @@ export default function ProfilePage({
 
   const { isConnected,isDisconnected,chain } = useAccount()
   const { address } = useAccount();
-  const chainId = import.meta.env.VITE_WC_ENV == "production" ? polygon.id : polygonAmoy.id;
+  const chainId = import.meta.env.VITE_WC_ENV == "production" ? bsc.id : bscTestnet.id;
   const { chainId: currentChainId } = useAccount();
   const [showModal, setShowModal] = useState(false)
   const [showphModal, setShow_PHModal] = useState(false)

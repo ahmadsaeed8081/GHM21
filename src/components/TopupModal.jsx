@@ -13,7 +13,7 @@ const ArrowIcon = () => (
     <polyline points="12 5 19 12 12 19" />
   </svg>
 )
-import { polygon, polygonAmoy } from "wagmi/chains";
+import { bsc, bscTestnet } from "wagmi/chains";
 import Web3, { providers } from "web3";
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -46,7 +46,7 @@ export default function ProvideHelpModal({ search,inner,user,CurrHalvingData,myL
 
   const { isConnected,isDisconnected,chain } = useAccount()
   const { address } = useAccount();
-  const chainId = import.meta.env.VITE_WC_ENV == "production" ? polygon.id : polygonAmoy.id;
+  const chainId = import.meta.env.VITE_WC_ENV == "production" ? bsc.id : bscTestnet.id;
   const { switchChainAsync } = useSwitchChain();
   const { chainId: currentChainId } = useAccount();
   const { writeContractAsync,writeContract,data:hash, ...states } = useWriteContract();
@@ -61,8 +61,12 @@ export default function ProvideHelpModal({ search,inner,user,CurrHalvingData,myL
 
 
 function ethToWei(amount) {
-    const web3= new Web3(new Web3.providers.HttpProvider("https://poly.api.pocket.network"));
-
+      const web3 =
+        new Web3(
+          new Web3.providers.HttpProvider(
+            "https://bsc-rpc.publicnode.com"
+          )
+        )
   return web3.utils.toWei(amount.toString(), "ether");
 }
   // let order_no=[];

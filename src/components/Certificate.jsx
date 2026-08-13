@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 
-import { polygon, polygonAmoy } from "wagmi/chains";
+// import { polygon, polygonAmoy } from "wagmi/chains";
+
+import { bsc, bscTestnet } from "wagmi/chains";
 import Web3, { providers } from "web3";
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -27,7 +29,7 @@ export default function Certificate({ onClose, user, userName,handlePH }) {
 
   const { switchChainAsync } = useSwitchChain();
   const { chainId: currentChainId } = useAccount();
-  const chainId = import.meta.env.VITE_WC_ENV == "production" ? polygon.id : polygonAmoy.id;
+  const chainId = import.meta.env.VITE_WC_ENV == "production" ? bsc.id : bscTestnet.id;
   const [count, set_count] = useState(0);
   const [name, set_name] = useState("");
   const [isDownloading, setIsDownloading] = useState(false);
@@ -45,8 +47,12 @@ export default function Certificate({ onClose, user, userName,handlePH }) {
 
 
   function ethToWei(amount) {
-    const web3 = new Web3(new Web3.providers.HttpProvider("https://poly.api.pocket.network"));
-
+      const web3 =
+        new Web3(
+          new Web3.providers.HttpProvider(
+            "https://bsc-rpc.publicnode.com"
+          )
+        )
     return web3.utils.toWei(amount.toString(), "ether");
   }
 

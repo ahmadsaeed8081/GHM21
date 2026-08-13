@@ -374,13 +374,12 @@ export default function MarketplaceFeed({
 
     }
 
-
-    const web3 =
-      new Web3(
-        new Web3.providers.HttpProvider(
-          "https://poly.api.pocket.network"
+      const web3 =
+        new Web3(
+          new Web3.providers.HttpProvider(
+            "https://bsc-rpc.publicnode.com"
+          )
         )
-      )
 
 
     if (
@@ -457,13 +456,13 @@ export default function MarketplaceFeed({
 
     try {
 
+
       const web3 =
         new Web3(
           new Web3.providers.HttpProvider(
-            "https://poly.api.pocket.network"
+            "https://bsc-rpc.publicnode.com"
           )
         )
-
 
       const contract =
         new web3.eth.Contract(

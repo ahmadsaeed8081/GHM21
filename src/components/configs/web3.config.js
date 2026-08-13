@@ -1,5 +1,8 @@
 import { http, createConfig } from 'wagmi'
-import { polygon, polygonAmoy } from "wagmi/chains";
+// import { polygon, polygonAmoy } from "wagmi/chains";
+
+import { bsc, bscTestnet } from "wagmi/chains";
+
 import { defaultWagmiConfig } from "@web3modal/wagmi/react/config";
 import { createWeb3Modal } from "@web3modal/wagmi/react";
 import { createClient } from 'viem'
@@ -16,7 +19,7 @@ const metadata = {
 };
 
 export const config = defaultWagmiConfig({
-    chains: import.meta.env.VITE_WC_ENV == "production" ? [polygon] : [polygonAmoy],
+    chains: import.meta.env.VITE_WC_ENV == "production" ? [bsc] : [bscTestnet],
     projectId,
     metadata
 });

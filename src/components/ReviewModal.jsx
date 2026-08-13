@@ -1,7 +1,8 @@
 import { useState,useEffect } from 'react'
 
-import { polygon, polygonAmoy } from "wagmi/chains";
-import Web3, { providers } from "web3";
+// import { polygon, polygonAmoy } from "wagmi/chains";
+
+import { bsc, bscTestnet } from "wagmi/chains";import Web3, { providers } from "web3";
 
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -52,7 +53,7 @@ export default function ReviewModal({ onClose, onLater, onReview,is_suspended,is
 
     const { isConnected,isDisconnected,chain } = useAccount()
     const { address } = useAccount();
-    const chainId = import.meta.env.VITE_WC_ENV == "production" ? polygon.id : polygonAmoy.id;
+    const chainId = import.meta.env.VITE_WC_ENV == "production" ? bsc.id : bscTestnet.id;
     const { switchChainAsync } = useSwitchChain();
     const { chainId: currentChainId } = useAccount();
     const { writeContractAsync,writeContract,data:hash, ...states } = useWriteContract();
