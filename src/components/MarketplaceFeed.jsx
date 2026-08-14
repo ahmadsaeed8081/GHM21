@@ -614,6 +614,16 @@ export default function MarketplaceFeed({
               "
             >
               Marketplace Feed
+              <div                
+              
+              className="
+                font-sans
+                text-[16px]
+                text-white
+                max-sm:text-sm
+              "  >
+                
+                MAX Ph Need : {Number(total_Curr_market_seeking_ph)/10**18}</div>
             </h2>
 
           </div>

@@ -1,35 +1,94 @@
 import { useState } from 'react'
 
+
 const faqs = [
   {
-    q: 'What is GH Marketplace and how does it work?',
-    a: 'GH Marketplace is a decentralized blockchain platform where users can invest, earn rewards, and support community needs. It operates through smart contracts — meaning all transactions are transparent, automatic, and governed by code. The platform runs on the GH21 token and follows the principle: Code is Law.',
+    q: 'What is GHM21?',
+    a: 'GHM21 is a global community of mutual financial aid. It is a social financial network where people help each other directly.',
   },
   {
-    q: 'What is the GH21 token and what is it used for?',
-    a: 'GH21 is the native utility token of GH Marketplace. It powers all platform activity including providing help, boosting listings, accessing premium features, and earning halving rewards.',
+    q: 'Is GHM21 a bank or an investment?',
+    a: 'No. GHM21 is not a bank, an investment, or a business. There is no central bank account. It is a system that connects people who want to provide help to those who need it.',
   },
   {
-    q: 'How does the referral system work?',
-    a: 'GH Marketplace features a 3-level referral system. You earn commissions from your Direct referrals (Level 1), their referrals (Level 2), and one level beyond (Level 3). Your unique referral link is available on your Profile page.',
+    q: 'How does GHM21 work?',
+    a: 'GHM21 works through the "Circle of Help." You donate USDT directly to another member, and later, other members donate USDT directly to you.',
   },
   {
-    q: 'What is the Velocity Timer and why does it matter?',
-    a: 'The Velocity Timer (Recommit Timer) is a countdown that defines how long you have to recommit to an active help cycle. Failing to recommit within the window may result in losing your position in the queue.',
+    q: 'Where do the 30% returns come from?',
+    a: 'There is no "magic" profit-making machine. The 30% comes from the flow of new donations and re-commitments from existing members.',
   },
   {
-    q: 'What is the Needs Feed and how can I use it?',
-    a: 'The Needs Feed is the main Marketplace Feed where all active help seekers post their requests. You can search, filter, Dream, Boost, or Provide Help directly from any listing on the feed.',
+    q: 'What is the "Zero-Balance" logic, and why should I trust it?',
+    a: 'Most systems hold your money in a central bank account. In GHM21, the Smart Contract balance is always $0, meaning no one can run away with your money.',
   },
   {
-    q: 'Is GH Marketplace safe and audited?',
-    a: 'GH Marketplace operates entirely on smart contracts that are transparent and immutable on the blockchain. Every transaction is publicly verifiable — upholding our core principle: Code is Law.',
+    q: 'Who created GHM21?',
+    a: 'Every member of the launch team is anonymous. You do not need to trust a person; you put your trust in the decentralized blockchain smart contract where "Code is Law."',
   },
   {
-    q: 'How do I get started on GH Marketplace?',
-    a: 'Connect your crypto wallet using the Connect Wallet button, browse the Marketplace Feed, select a listing, and click "Provide Help". To receive help, post your own listing and wait for providers to respond.',
+    q: 'Will the Smart Contract be open or closed? Does it matter?',
+    a: 'The code is transparent and decentralized. This means no one, not even the creators, can change the rules, steal fees, or stop the counter.',
   },
-]
+  {
+    q: 'Why do I have a random referral code like 8KzP2n9Qx?',
+    a: 'This is "Privacy Logic." It prevents outsiders from tracking exactly when you joined or how many people are in the system.',
+  },
+  {
+    q: 'How do I join, and what wallet should I use?',
+    a: 'You join by connecting a Web3 wallet such as MetaMask or Trust Wallet and donating between the $10 minimum and $5,000 maximum.',
+  },
+  {
+    q: 'Can I start with any amount, or must I start with $5?',
+    a: 'You can start with any amount between $10 and $5,000.',
+  },
+  {
+    q: 'What is the "2-Hour Dash," and what happens if I miss it?',
+    a: 'When you choose to help, you have exactly 120 minutes to send the USDT. This keeps the marketplace moving.',
+  },
+  {
+    q: 'What happens when the 21 Million Cap is reached?',
+    a: 'The system does not "break"; it completes. No new members can join, but existing members finish their last cycles using the re-commitments already pledged.',
+  },
+  {
+    q: 'In what year will the Halving end and the 21M Cap be reached?',
+    a: 'We estimate this will be reached between Year 5 and Year 8. The "Halving" logic acts like a brake on a car. The closer we get to 21M, the slower the profit becomes (30% → 10%), stretching the life of the project.',
+  },
+  {
+    q: 'If the profit drops during a "Halving," is it still worth it?',
+    a: 'Yes. Lower profit means higher safety and stability.',
+  },
+  {
+    q: 'Why must I "Re-Commit" before I can take my profit?',
+    a: 'This is the "Pinky Promise" logic. It ensures that no one can "Hit and Run."',
+  },
+  {
+    q: 'What is "Anti-Whale" Protection?',
+    a: 'It stops one rich person from hogging all the help.',
+  },
+  {
+    q: 'What happens if I want to recommit $100 but seekers only need small amounts?',
+    a: 'The system uses "Overflow Routing" to help many people at once.',
+  },
+  {
+    q: 'What is "Bonus Burn"?',
+    a: 'It ensures leaders are actually helping, not just "collecting." If a Manager does not have an active contribution (PH) that matches their team\'s energy, bonuses are deleted.',
+  },
+  {
+    q: 'With re-commitment, everyone is technically "active." Is Bonus Burn still useful?',
+    a: 'Yes. It targets leaders who try to "play small" while their team plays big.',
+  },
+  {
+    q: 'How many friends do I need to unlock Level 9?',
+    a: 'You must be a Manager with 50 Direct Active Referrals and a Team Volume of $100,000.',
+  },
+  {
+    q: 'Is GHM21 a Ponzi/Pyramid scheme, is it legal, and how do Tasks/Reserves work?',
+    a: 'Scheme Check: No. In a pyramid, the top takes everything. In GHM21, because of the 21M Cap and Re-Commitment, the top must go to the back of the line to help the bottom.\n\nLegality: Giving money to another person is not prohibited by law. GHM21 is simply a platform that facilitates personal transfers.\n\nGuarantees: There are no guarantees. Participate only with spare money. The system depends on the honesty and activity of its members.\n\nTestimony Lock: You cannot start a new help cycle until you say "Thank You" by uploading a "Letter of Happiness" to attract new members.\n\nGlobal Reserve (0.5%): Community insurance used for manual tasks and system health, such as clearing long-waiting small nodes.',
+  },
+];
+
+
 
 const ChevronIcon = () => (
   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
