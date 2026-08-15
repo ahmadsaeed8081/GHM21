@@ -32,7 +32,7 @@ import {
 
 } from "./configs/Contracts";
 
-export default function ProvideHelpModal({ search,inner,user,CurrHalvingData,myLastOrder,onClose,usdt_balance,order,referral,is_suspended,isBlacklisted,allorders,index,total_Curr_market_seeking_ph }) {
+export default function ProvideHelpModal({ search,inner,user,CurrHalvingData,myLastOrder,onClose,usdt_balance,order,referral,is_suspended,isBlacklisted,allorders,index }) {
   const [isEditing, setIsEditing] = useState(false)
   const [amount, setAmount] = useState(0)
   const [reason, setReason] = useState('')
@@ -143,8 +143,7 @@ useEffect(()=>{
 
   async function handlePH()
   {
-    // alert((Number(total_Curr_market_seeking_ph)/10**18))
-    // alert(total_Curr_market_seeking_ph)
+
     if(isDisconnected)
       {
         alert("Kindly Connect your wallet");
@@ -208,11 +207,7 @@ useEffect(()=>{
           return;
         }
 
-      if(amount > (Number(total_Curr_market_seeking_ph)/10**18))
-      {
-        alert("Kindly choose a different amount,You cant invest more than the market need "+  (Number(total_Curr_market_seeking_ph)/10**18));
-        return;
-      }
+
 
       if(amount > (Number(CurrHalvingData.max_ph)/10**18))
       {

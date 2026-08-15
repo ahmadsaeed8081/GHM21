@@ -68,7 +68,7 @@ export default function MarketplaceFeed({
   handlePH,
   referral,
   myLastOrder,
-  total_Curr_market_seeking_ph,
+
   myTeam_orders,
   SpeedStarOrders,
   small_orders,
@@ -614,16 +614,7 @@ export default function MarketplaceFeed({
               "
             >
               Marketplace Feed
-              <div                
-              
-              className="
-                font-sans
-                text-[16px]
-                text-white
-                max-sm:text-sm
-              "  >
-                
-                MAX Ph Need : {Number(total_Curr_market_seeking_ph)/10**18}</div>
+
             </h2>
 
           </div>
@@ -819,9 +810,10 @@ export default function MarketplaceFeed({
                     ["latest", "Latest"],
                     ["My_Team", "My Team"],
                     ["Speedstar", "Speedstars"],
-                    ["Exit", "Exit Helps"],
                     ["Small", "Small Helps"],
-                    ["Big", "Big Helps"]
+                    ["Big", "Big Helps"],
+                    ["Exit", "Exit Helps"],
+
                   ].map(
                     ([value, label]) => (
 
@@ -974,9 +966,7 @@ export default function MarketplaceFeed({
                 indexer
               }
 
-              total_Curr_market_seeking_ph={
-                total_Curr_market_seeking_ph
-              }
+
 
               referral={
                 referral
@@ -1074,9 +1064,6 @@ export default function MarketplaceFeed({
                       index
                     }
 
-                    total_Curr_market_seeking_ph={
-                      total_Curr_market_seeking_ph
-                    }
 
                     referral={
                       referral

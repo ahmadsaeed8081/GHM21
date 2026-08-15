@@ -70,10 +70,6 @@ export default function App() {
   const [outflowVelocityCheck, setOutflowVelocityCheck] = useState(null)
   const [totalSuspension, setTotalSuspension] = useState(null)
 
-  const [
-    total_Curr_market_seeking_ph,
-    settotal_Curr_market_seeking_ph
-  ] = useState(null)
 
   const [myLastOrder, set_myLastOrder] = useState([])
 
@@ -269,10 +265,6 @@ export default function App() {
           .totalusers(address)
           .call()
 
-      const total_Curr_market_seeking_ph =
-        await contract.methods
-          .total_Curr_market_seeking_ph()
-          .call()
 
       const boostCharges =
         await contract.methods
@@ -446,10 +438,6 @@ export default function App() {
       set_myTeam_orders(myTeam_orders)
       set_myLastOrder(
         my_lastorder
-      )
-console.log(curr_time)
-      settotal_Curr_market_seeking_ph(
-        total_Curr_market_seeking_ph
       )
 
       setTotalBusiness(
@@ -1531,9 +1519,6 @@ handle_orders_feed={handle_orders_feed}
               }
               myLockedOrders={myLockedOrders}
 
-              total_Curr_market_seeking_ph={
-                total_Curr_market_seeking_ph
-              }
 
               SpeedStarOrders={
                 SpeedStarOrders

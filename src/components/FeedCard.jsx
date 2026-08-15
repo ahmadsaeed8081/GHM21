@@ -87,7 +87,6 @@ export default function FeedCard({
   myLastOrder,
   isBlackListed,
   isSuspended,
-  total_Curr_market_seeking_ph,
   index,
   expanded = false,
   onToggleDream,
@@ -504,7 +503,7 @@ async function like() {
       />
       </div>
 
-      {showModal && <ProvideHelpModal handle_PH={handlePH} myLockedOrders={myLockedOrders} isBlacklisted={isBlackListed} is_Suspended={isSuspended} handle_orders_feed={handle_orders_feed} inner={inner} search={search} user={user} myLastOrder={myLastOrder} CurrHalvingData={CurrHalvingData} total_Curr_market_seeking_ph={total_Curr_market_seeking_ph}  allorders={allorders} index={index} referral={referral} usdt_balance={usdt_balance} order={order} onClose={() => setShowModal(false)} />}
+      {showModal && <ProvideHelpModal handle_PH={handlePH} myLockedOrders={myLockedOrders} isBlacklisted={isBlackListed} is_Suspended={isSuspended} handle_orders_feed={handle_orders_feed} inner={inner} search={search} user={user} myLastOrder={myLastOrder} CurrHalvingData={CurrHalvingData}   allorders={allorders} index={index} referral={referral} usdt_balance={usdt_balance} order={order} onClose={() => setShowModal(false)} />}
     </>
   )
 }

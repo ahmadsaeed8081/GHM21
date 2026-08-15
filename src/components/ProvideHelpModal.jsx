@@ -34,7 +34,7 @@ import {
 
 } from "../../src/components/configs/Contracts";
 
-export default function ProvideHelpModal({     handle_PH,        myLockedOrders,  handle_orders_feed,search,inner,user,CurrHalvingData,myLastOrder,onClose,usdt_balance,order,referral,is_Suspended,isBlacklisted,allorders,index,total_Curr_market_seeking_ph }) {
+export default function ProvideHelpModal({     handle_PH,        myLockedOrders,  handle_orders_feed,search,inner,user,CurrHalvingData,myLastOrder,onClose,usdt_balance,order,referral,is_Suspended,isBlacklisted,allorders,index }) {
   const [isEditing, setIsEditing] = useState(false)
   const [amount, setAmount] = useState('$50')
   const [reason, setReason] = useState('')
@@ -247,16 +247,28 @@ useEffect(()=>{
         alert("please write Reason to help");
         return;
       }
-      if(amount < 10)
+      if(user.ph_count==0)
+      {      
+        if(amount < 20)
         {
-          alert("Minimum PH smount is 10$");
+          alert("Initial PH smount is 20$");
           return;
         }
-      if(amount > (Number(total_Curr_market_seeking_ph)/10**18))
-      {
-        alert("Kindly choose a different amount,You cant invest more than the market need "+  (Number(total_Curr_market_seeking_ph)/10**18));
-        return;
+
       }
+      else{
+        if(amount < 10)
+          {
+            alert("Minimum PH smount is 10$");
+            return;
+          }
+      }
+
+      // if(amount > (Number(total_Curr_market_seeking_ph)/10**18))
+      // {
+      //   alert("Kindly choose a different amount,You cant invest more than the market need "+  (Number(total_Curr_market_seeking_ph)/10**18));
+      //   return;
+      // }
 
       if(amount > (Number(CurrHalvingData.max_ph)/10**18))
       {
