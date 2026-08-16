@@ -616,7 +616,12 @@ export default function MarketplaceFeed({
               Marketplace Feed
 
             </h2>
+<div>
+<p className="text-center font-sans text-[13px] font-normal leading-none tracking-normal text-gray-300">
+         ⚠️ GHM21 is mutual aid community. Use spare money only! 
 
+      </p>
+   </div>
           </div>
 
 

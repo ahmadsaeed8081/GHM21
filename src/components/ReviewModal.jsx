@@ -168,7 +168,7 @@ async function submission_of_letter()
 
   async function handleSubmit() { 
     const MAX_IMAGE_SIZE = 2 * 1024 * 1024; // 10 MB
-    const MAX_VIDEO_SIZE = 10 * 1024 * 1024; // 20 MB
+    const MAX_VIDEO_SIZE = 5 * 1024 * 1024; // 20 MB
     if(review.length<25)
     {
       alert("kindly write a letter that contain atleast 25 characters ")
@@ -189,7 +189,7 @@ async function submission_of_letter()
     if (media.type.startsWith("video/")) {
   
       if (media.size > MAX_VIDEO_SIZE ) {
-        alert("Video size must be less than 10 MB.");
+        alert("Video size must be less than 5 MB.");
         return;
       }
     }
