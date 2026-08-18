@@ -1,6 +1,6 @@
 
 import { useState } from 'react'
-import logo from '../assets/logo.png'
+import logo from '../assets/logo.jpeg'
 import wallet from '../assets/icons/wallet.png'
 import user from '../assets/icons/user.png'
 import whitepaper from '../assets/GHM21_Whitepaper.pdf'

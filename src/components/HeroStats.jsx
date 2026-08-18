@@ -72,14 +72,14 @@ const halving =[
           <div
             className="absolute inset-y-0 left-0 rounded-full"
             style={{
-              width: `${(((Number(totalBusiness) / 10 ** 18) / 21000) * 100)}%`,
+              width: `${(((Number(totalBusiness) / 10 ** 18) / 2100) * 100)}%`,
               background: 'linear-gradient(90deg, #00e676 0%, #00c896 40%, #3b82f6 100%)',
             }}
           />
           <span className="relative z-[1] ml-4   w-full text-center text-[13px] font-medium text-gray-300">
           Halving progress:{" "}
 {parseFloat(
-  ((((Number(totalBusiness) / 10 ** 18) / 21000) * 100).toFixed())
+  ((((Number(totalBusiness) / 10 ** 18) / 2100) * 100).toFixed())
 )}
 %          </span>
         </div>
