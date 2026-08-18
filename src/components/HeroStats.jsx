@@ -63,7 +63,7 @@ const halving =[
           /
         </span>
         <span className="text-[clamp(24px,3.5vw,42px)] font-bold leading-none text-white max-sm:text-[22px]">
-          21000 <span className="  text-sm text-gray-400 max-sm:text-[15px]" > USDT</span>
+          2100 <span className="  text-sm text-gray-400 max-sm:text-[15px]" > USDT</span>
         </span>
       </div>
 
