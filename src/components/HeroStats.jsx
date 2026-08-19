@@ -10,37 +10,23 @@ const halving =[
   { label: 'Halving:', value: (Number(currHalvingPhase>=0) ? (Number(currHalvingPhase)  ):0)},
 
 
+
+
   {
     label: 'Volume:',
     value:
-      Number(currHalvingPhase) === 0 ? '0 – $2.1K' :
-      Number(currHalvingPhase) === 1 ? '$2.1K – $4.2K' :
-      Number(currHalvingPhase) === 2 ? '$4.2K – $6.3K' :
-      Number(currHalvingPhase) === 3 ? '$6.3K – $8.4K' :
-      Number(currHalvingPhase) === 4 ? '$8.4K – $10.5K' :
-      Number(currHalvingPhase) === 5 ? '$10.5K – $12.6K' :
-      Number(currHalvingPhase) === 6 ? '$12.6K – $14.7K' :
-      Number(currHalvingPhase) === 7 ? '$14.7K – $16.8K' :
-      Number(currHalvingPhase) === 8 ? '$16.8K – $18.9K' :
-      Number(currHalvingPhase) === 9 ? '$18.9K – $21.0K' :
-      '$21.0K'
+      Number(currHalvingPhase) === 0 ? '0 – $2.1M' :
+      Number(currHalvingPhase) === 1 ? '$2.1M – $4.2M' :
+      Number(currHalvingPhase) === 2 ? '$4.2M – $6.3M' :
+      Number(currHalvingPhase) === 3 ? '$6.3M – $8.4M' :
+      Number(currHalvingPhase) === 4 ? '$8.4M – $10.5M' :
+      Number(currHalvingPhase) === 5 ? '$10.5M – $12.6M' :
+      Number(currHalvingPhase) === 6 ? '$12.6M – $14.7M' :
+      Number(currHalvingPhase) === 7 ? '$14.7M – $16.8M' :
+      Number(currHalvingPhase) === 8 ? '$16.8M – $18.9M' :
+      Number(currHalvingPhase) === 9 ? '$18.9M – $21.0M' :
+      '$21.0M'
   },
-
-  // {
-  //   label: 'Volume:',
-  //   value:
-  //     Number(currHalvingPhase) === 0 ? '0 – $2.1M' :
-  //     Number(currHalvingPhase) === 1 ? '$2.1M – $4.2M' :
-  //     Number(currHalvingPhase) === 2 ? '$4.2M – $6.3M' :
-  //     Number(currHalvingPhase) === 3 ? '$6.3M – $8.4M' :
-  //     Number(currHalvingPhase) === 4 ? '$8.4M – $10.5M' :
-  //     Number(currHalvingPhase) === 5 ? '$10.5M – $12.6M' :
-  //     Number(currHalvingPhase) === 6 ? '$12.6M – $14.7M' :
-  //     Number(currHalvingPhase) === 7 ? '$14.7M – $16.8M' :
-  //     Number(currHalvingPhase) === 8 ? '$16.8M – $18.9M' :
-  //     Number(currHalvingPhase) === 9 ? '$18.9M – $21.0M' :
-  //     '$21.0M'
-  // },
 
 
 // { label: 'Volume:', value: "$"+ 0  +" = $" + (CurrHalvingData? Number(CurrHalvingData.volume)/10**18:0) },
