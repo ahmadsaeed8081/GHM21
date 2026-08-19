@@ -182,6 +182,7 @@ useEffect(()=>{
   {
     // alert((Number(total_Curr_market_seeking_ph)/10**18))
     // alert(total_Curr_market_seeking_ph)
+    return;
     if(isDisconnected)
       {
         alert("Kindly Connect your wallet");
